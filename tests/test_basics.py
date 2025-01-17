@@ -10,9 +10,8 @@ node_attr_dtypes = [
     {"position": "int[4]"},
 ]
 edge_attr_dtypes = [
-    {},
-    {"score": "float64"},
     {"score": "float64", "color": "uint8"},
+    {"score": "float32", "color": "int16"},
 ]
 
 
@@ -32,8 +31,9 @@ def test_read_write_consistency(
         directed=directed,
     )
 
+    nodes = np.array([10, 2, 127, 4, 5], dtype=graph.node_dtype)
     graph.add_nodes(
-        np.array([10, 2, 127, 4, 5], dtype=graph.node_dtype),
+        nodes,
         position=np.array(
             [
                 [0.1, 0.5, 100.0, 1.0],
@@ -46,8 +46,33 @@ def test_read_write_consistency(
         ),
     )
 
+    edges = np.array(
+        [
+            [10, 2],
+            [2, 127],
+            [2, 4],
+            [4, 5],
+        ],
+        dtype=graph.node_dtype,
+    )
+    graph.add_edges(
+        edges,
+        score=np.array([0.1, 0.2, 0.3, 0.4], dtype=edge_attr_dtypes["score"]),
+        color=np.array([1, 2, 3, 4], dtype=edge_attr_dtypes["color"]),
+    )
+
     geff.write(graph, "rw_consistency.zarr/graph")
 
     compare = geff.read("rw_consistency.zarr/graph")
 
-    assert graph == compare
+    np.testing.assert_equal(graph.nodes, compare.nodes)
+    np.testing.assert_equal(graph.edges, compare.edges)
+    np.testing.assert_equal(
+        graph.node_attrs[nodes].position, compare.node_attrs[nodes].position
+    )
+    np.testing.assert_equal(
+        graph.edge_attrs[edges].score, compare.edge_attrs[edges].score
+    )
+    np.testing.assert_equal(
+        graph.edge_attrs[edges].color, compare.edge_attrs[edges].color
+    )
