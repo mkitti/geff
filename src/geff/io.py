@@ -27,9 +27,74 @@ def write(
     if axis_units:
         graph.attrs["axis_units"] = axis_units
 
+    # get node and edge IDs
+    nodes = graph.nodes
+    edges = graph.edges
+
     # write nodes
-    group["nodes/ids"] = graph.nodes
+    group["nodes/ids"] = nodes
+
+    # write node attributes
+    for name in graph.node_attr_dtypes.keys():
+        group[f"nodes/attrs/{name}"] = graph.node_attrs[nodes].__getattr__(name)
+
+    # write edges
+    group["edges/ids"] = graph.edges
+
+    # write edge attributes
+    for name in graph.edge_attr_dtypes.keys():
+        group[f"edges/attrs/{name}"] = graph.edge_attrs[edges].__getattr__(name)
 
 
 def read(path):
-    pass
+    # open zarr container
+    group = zarr.open(path, "r")
+
+    # read meta-data
+    position_attr = group.attrs["position_attr"]
+    directed = group.attrs["directed"]
+
+    ndims = group[f"nodes/attrs/{position_attr}"].shape[1]
+    nodes = group["nodes/ids"][:]
+    edges = group["edges/ids"][:]
+    node_dtype = str(nodes.dtype)
+
+    # collect node attributes
+    node_attr_dtypes = {}
+    node_attrs = {}
+    for name in group["nodes/attrs"]:
+        ds = group[f"nodes/attrs/{name}"]
+        dtype = ds.dtype
+        size = ds.shape
+        dtype_str = str(dtype) + ("" if len(size) == 1 else f"[{size[1]}]")
+        node_attr_dtypes[name] = dtype_str
+        node_attrs[name] = ds[:]
+
+    # collect edge attributes
+    edge_attr_dtypes = {}
+    edge_attrs = {}
+    for name in group["edges/attrs"]:
+        ds = group[f"edges/attrs/{name}"]
+        dtype = ds.dtype
+        size = ds.shape
+        dtype_str = str(dtype) + ("" if len(size) == 1 else f"[{size[1]}]")
+        edge_attr_dtypes[name] = dtype_str
+        edge_attrs[name] = ds[:]
+
+    # create graph
+    graph = sg.SpatialGraph(
+        ndims=ndims,
+        node_dtype=node_dtype,
+        node_attr_dtypes=node_attr_dtypes,
+        edge_attr_dtypes=edge_attr_dtypes,
+        position_attr=position_attr,
+        directed=directed,
+    )
+
+    # add nodes
+    graph.add_nodes(nodes, **node_attrs)
+
+    # add edges
+    graph.add_edges(edges, **edge_attrs)
+
+    return graph
