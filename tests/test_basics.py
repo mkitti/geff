@@ -1,6 +1,6 @@
 import pytest
 import spatial_graph as sg
-import geff
+import geff.spatial_graph
 import numpy as np
 
 
@@ -61,9 +61,9 @@ def test_read_write_consistency(
         color=np.array([1, 2, 3, 4], dtype=edge_attr_dtypes["color"]),
     )
 
-    geff.write(graph, "rw_consistency.zarr/graph")
+    geff.spatial_graph.write(graph, "rw_consistency.zarr/graph")
 
-    compare = geff.read("rw_consistency.zarr/graph")
+    compare = geff.spatial_graph.read("rw_consistency.zarr/graph")
 
     np.testing.assert_equal(graph.nodes, compare.nodes)
     np.testing.assert_equal(graph.edges, compare.edges)

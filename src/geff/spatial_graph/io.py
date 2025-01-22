@@ -1,7 +1,7 @@
 import zarr
 import spatial_graph as sg
 from pathlib import Path
-from .version import __version
+from geff import __version
 from typing import Optional
 
 
