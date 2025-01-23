@@ -34,7 +34,7 @@ jobs:
       - name: Set up python
         uses: actions/setup-python@v5
         with:
-          python-version-file: .python-version
+          python-version-file: ${{ matrix.python-version }}
 
       - name: Install project and requirements
         run: uv sync --all-extras --dev
