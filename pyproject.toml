@@ -1,10 +1,16 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+
 [project]
 name = "geff"
-version = "0.1.0"
 description = "Reference implementation of the Graph Exchange File Format"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT License" }
+dynamic = ['version']
 dependencies = [
     "spatial-graph @ git+https://github.com/funkelab/spatial_graph.git@d02b691e4fa0f184871939a89c6f964bfd0f5e39",
     "zarr<3.0.0",
@@ -19,13 +25,9 @@ dev = [
     "ruff"
 ]
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[tool.hatch.metadata]
-# Enables installing from git commit
-allow-direct-references = true
+[project.urls]
+repository = "https://github.com/funkelab/geff"
+homepage = "https://github.com/funkelab/geff"
 
 # https://github.com/charliermarsh/ruff
 [tool.ruff]
