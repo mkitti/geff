@@ -1,10 +1,13 @@
-import zarr
-import networkx as nx
+import warnings
 from pathlib import Path
+
 # from geff import __version
 from typing import Optional
-import warnings
+
+import networkx as nx
 import numpy as np
+import zarr
+
 
 def get_roi(graph: nx.Graph, position_attr: str) -> tuple[tuple[float, ...], tuple[float, ...]]:
     _min = None
@@ -17,17 +20,17 @@ def get_roi(graph: nx.Graph, position_attr: str) -> tuple[tuple[float, ...], tup
         else:
             _min = np.min([_min, pos], axis=0)
             _max = np.max([_max, pos], axis=0)
-    
+
     return tuple(_min.tolist()), tuple(_max.tolist())
+
 
 def get_node_attrs(graph: nx.Graph) -> list[str]:
     return list({k for n in graph.nodes for k in graph.nodes[n]})
 
+
 def get_edge_attrs(graph: nx.Graph) -> list[str]:
     return list({k for e in graph.edges for k in graph.edges[e]})
 
-
-            
 
 def write(
     graph: nx.Graph,

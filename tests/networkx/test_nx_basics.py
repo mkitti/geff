@@ -1,8 +1,8 @@
-import pytest
 import networkx as nx
-import geff.networkx
 import numpy as np
+import pytest
 
+import geff.networkx
 
 node_dtypes = ["int8", "uint8", "int16", "uint16"]
 node_attr_dtypes = [
@@ -22,9 +22,7 @@ edge_attr_dtypes = [
 @pytest.mark.parametrize("node_attr_dtypes", node_attr_dtypes)
 @pytest.mark.parametrize("edge_attr_dtypes", edge_attr_dtypes)
 @pytest.mark.parametrize("directed", [True, False])
-def test_read_write_consistency(
-    tmpdir, node_dtype, node_attr_dtypes, edge_attr_dtypes, directed
-):
+def test_read_write_consistency(tmpdir, node_dtype, node_attr_dtypes, edge_attr_dtypes, directed):
     graph = nx.DiGraph() if directed else nx.Graph()
 
     nodes = np.array([10, 2, 127, 4, 5], dtype=node_dtype)
@@ -36,7 +34,7 @@ def test_read_write_consistency(
             [0.4, 0.2, 400.0, 0.1],
             [0.5, 0.1, 500.0, 0.1],
         ],
-        dtype = node_attr_dtypes["position"]
+        dtype=node_attr_dtypes["position"],
     )
     for node, pos in zip(nodes, positions):
         graph.add_node(node.item(), position=pos.tolist())
@@ -50,8 +48,8 @@ def test_read_write_consistency(
         ],
         dtype=node_dtype,
     )
-    scores=np.array([0.1, 0.2, 0.3, 0.4], dtype=edge_attr_dtypes["score"])
-    colors=np.array([1, 2, 3, 4], dtype=edge_attr_dtypes["color"])
+    scores = np.array([0.1, 0.2, 0.3, 0.4], dtype=edge_attr_dtypes["score"])
+    colors = np.array([1, 2, 3, 4], dtype=edge_attr_dtypes["color"])
     for edge, score, color in zip(edges, scores, colors):
         graph.add_edge(*edge.tolist(), score=score.item(), color=color.item())
 
@@ -65,7 +63,7 @@ def test_read_write_consistency(
     assert set(graph.edges) == set(compare.edges)
     for node in nodes:
         assert graph.nodes[node.item()]["position"] == compare.nodes[node.item()]["position"]
-    
+
     for edge in edges:
         assert graph.edges[edge.tolist()]["score"] == compare.edges[edge.tolist()]["score"]
         assert graph.edges[edge.tolist()]["color"] == compare.edges[edge.tolist()]["color"]
