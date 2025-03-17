@@ -1,9 +1,6 @@
 import warnings
-import warnings
 from pathlib import Path
 from typing import Optional
-
-import networkx as nx
 
 import networkx as nx
 import numpy as np
@@ -37,7 +34,6 @@ def get_roi(graph: nx.Graph, position_attr: str) -> tuple[tuple[float, ...], tup
     return tuple(_min.tolist()), tuple(_max.tolist())  # type: ignore
 
 
-
 def get_node_attrs(graph: nx.Graph) -> list[str]:
     """Get the attribute keys present on any node in the networkx graph. Does not imply
     that the attributes are present on all nodes.
@@ -51,7 +47,6 @@ def get_node_attrs(graph: nx.Graph) -> list[str]:
     return list({k for n in graph.nodes for k in graph.nodes[n]})
 
 
-
 def get_edge_attrs(graph: nx.Graph) -> list[str]:
     """Get the attribute keys present on any edge in the networkx graph. Does not imply
     that the attributes are present on all edges.
@@ -63,7 +58,6 @@ def get_edge_attrs(graph: nx.Graph) -> list[str]:
         list[str]: A list of all unique edge attribute keys
     """
     return list({k for e in graph.edges for k in graph.edges[e]})
-
 
 
 def write(
