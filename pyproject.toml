@@ -28,6 +28,10 @@ spatial-graph = [
     "spatial-graph @ git+https://github.com/funkelab/spatial_graph.git@d02b691e4fa0f184871939a89c6f964bfd0f5e39",
 ]
 
+networkx = [
+    "networkx",
+]
+
 
 [tool.pixi.project]
 channels = ["conda-forge"]
@@ -44,6 +48,8 @@ default = { solve-group = "default" }
 dev = { features = ["dev"], solve-group = "default" }
 dev-sg = { features = ["dev", "spatial-graph"], solve-group = "default"}
 build = { features = ["build"], solve-group = "default" }
+networkx = {features=["networkx"], solve-group = "default"}
+dev-nx = { features = ["dev", "networkx"], solve-group = "default"}
 
 [tool.pixi.tasks]
 
