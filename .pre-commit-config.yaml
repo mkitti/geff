@@ -2,6 +2,7 @@ ci:
   autoupdate_schedule: monthly
   autofix_commit_msg: "style(pre-commit.ci): auto fixes [...]"
   autoupdate_commit_msg: "ci(pre-commit.ci): autoupdate"
+  autofix_prs: false
 
 repos:
   - repo: https://github.com/crate-ci/typos
@@ -27,5 +28,5 @@ repos:
       - id: mypy
         files: "^src/"
         # # you have to add the things you want to type check against here
-        # additional_dependencies:
-        #   - numpy
+        additional_dependencies:
+          - types-pyyaml
