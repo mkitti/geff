@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://funkelab.github.io/geff/main/reference/geff/metadata_schema/">
+        <link rel="canonical" href="https://funkelab.github.io/geff/main/reference/geff/utils/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../metadata_schema/">
       
       
-        <link rel="next" href="../utils/">
+        <link rel="next" href="../networkx/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>geff.metadata_schema - geff</title>
+        <title>geff.utils - geff</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#geff.metadata_schema" class="md-skip">
+        <a href="#geff.utils" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              geff.metadata_schema
+              geff.utils
             
           </span>
         </div>
@@ -315,6 +315,28 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../metadata_schema/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    geff.metadata_schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -331,7 +353,7 @@
           
   
   <span class="md-ellipsis">
-    geff.metadata_schema
+    geff.utils
     
   </span>
   
@@ -343,7 +365,7 @@
         
   
   <span class="md-ellipsis">
-    geff.metadata_schema
+    geff.utils
     
   </span>
   
@@ -366,11 +388,26 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#geff.metadata_schema.GeffMetadata" class="md-nav__link">
+  <a href="#geff.utils.validate" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;GeffMetadata
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;validate
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label=" validate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#geff.utils.validate(path)" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-parameter"></code>&nbsp;path
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -378,28 +415,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../utils/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    geff.utils
-    
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -601,11 +616,26 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#geff.metadata_schema.GeffMetadata" class="md-nav__link">
+  <a href="#geff.utils.validate" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;GeffMetadata
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;validate
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label=" validate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#geff.utils.validate(path)" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-parameter"></code>&nbsp;path
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -629,8 +659,8 @@
 
 
 
-<h1 id="geff.metadata_schema" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <span class="doc doc-object-name doc-module-name">geff.metadata_schema</span>
+<h1 id="geff.utils" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <span class="doc doc-object-name doc-module-name">geff.utils</span>
 
 
 </h1>
@@ -644,23 +674,23 @@
 
 
 
-<p><span class="doc-section-title">Classes:</span></p>
+
+
+<p><span class="doc-section-title">Functions:</span></p>
     <ul>
-        <li class="doc-section-item field-body">
-          <b><code><a class="autorefs autorefs-internal" title="            GeffMetadata (geff.metadata_schema.GeffMetadata)" href="#geff.metadata_schema.GeffMetadata">GeffMetadata</a></code></b>
-          –
-          <div class="doc-md-description">
-            <p>Geff metadata schema to validate the attributes json file in a geff zarr</p>
-          </div>
-        </li>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="            validate (geff.utils.validate)" href="#geff.utils.validate">validate</a></code></b>
+            –
+            <div class="doc-md-description">
+              <p>Check that the structure of the zarr conforms to geff specification</p>
+            </div>
+          </li>
     </ul>
 
 
 
 
 
-
-
   <div class="doc doc-children">
 
 
@@ -670,55 +700,126 @@
 
 
 
-<div class="doc doc-object doc-class">
+
+<div class="doc doc-object doc-function">
 
 
-
-<h2 id="geff.metadata_schema.GeffMetadata" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">GeffMetadata</span>
+<h2 id="geff.utils.validate" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <span class="doc doc-object-name doc-function-name">validate</span>
 
 
 </h2>
-
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">validate</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
-            <p class="doc doc-class-bases">
-              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+        <p>Check that the structure of the zarr conforms to geff specification</p>
 
 
-        <p>Geff metadata schema to validate the attributes json file in a geff zarr</p>
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+<h3 id="geff.utils.validate(path)" class="doc doc-heading doc-heading-parameter">              <b><code>path</code></b>
+</h3>              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>)
+          –
+          <div class="doc-md-description">
+            <p>Path to geff zarr</p>
+          </div>
+        </li>
+    </ul>
 
 
+            <details class="quote">
+              <summary>Source code in <code>src/geff/utils.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check that the structure of the zarr conforms to geff specification</span>
 
+<span class="sd">    Args:</span>
+<span class="sd">        path (str): Path to geff zarr</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check that directory exists</span>
+    <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Directory </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> does not exist&quot;</span>
 
+    <span class="n">z</span> <span class="o">=</span> <span class="n">zarr</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
 
+    <span class="k">assert</span> <span class="s2">&quot;graph&quot;</span> <span class="ow">in</span> <span class="n">z</span><span class="p">,</span> <span class="s2">&quot;geff zarr must contain a graph group&quot;</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span>
 
+    <span class="c1"># graph attrs validation</span>
+    <span class="c1"># Raises pydantic.ValidationError or ValueError</span>
+    <span class="n">GeffMetadata</span><span class="p">(</span><span class="o">**</span><span class="n">graph</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 
+    <span class="k">assert</span> <span class="s2">&quot;nodes&quot;</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">,</span> <span class="s2">&quot;graph group must contain a nodes group&quot;</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;nodes&quot;</span><span class="p">]</span>
 
+    <span class="c1"># ids and attrs/position are required and should be same length</span>
+    <span class="k">assert</span> <span class="s2">&quot;ids&quot;</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">,</span> <span class="s2">&quot;nodes group must contain an ids array&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;attrs/position&quot;</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">,</span> <span class="s2">&quot;nodes group must contain an attrs/position array&quot;</span>
 
+    <span class="c1"># Attribute array length should match id length</span>
+    <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;attrs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">attr_len</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;attrs&quot;</span><span class="p">][</span><span class="n">attr</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">id_len</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;ids&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="n">attr_len</span> <span class="o">==</span> <span class="n">id_len</span>
+        <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Node attribute </span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> has length </span><span class="si">{</span><span class="n">attr_len</span><span class="si">}</span><span class="s2">, which does not match id length </span><span class="si">{</span><span class="n">id_len</span><span class="si">}</span><span class="s2">&quot;</span>
 
+    <span class="k">assert</span> <span class="s2">&quot;edges&quot;</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">,</span> <span class="s2">&quot;graph group must contain an edge group&quot;</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;edges&quot;</span><span class="p">]</span>
 
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
+    <span class="c1"># Edges only require ids which contain nodes for each edge</span>
+    <span class="k">assert</span> <span class="s2">&quot;ids&quot;</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">,</span> <span class="s2">&quot;edge group must contain ids array&quot;</span>
+    <span class="n">id_shape</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="s2">&quot;ids&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="n">id_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span>
+    <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;edges ids must have a last dimension of size 2, received shape </span><span class="si">{</span><span class="n">id_shape</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div></td></tr></table></div>
+            </details>
     </div>
 
 </div>
-
 
 
 
