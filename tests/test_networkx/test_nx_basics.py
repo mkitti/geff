@@ -2,7 +2,7 @@ import networkx as nx
 import numpy as np
 import pytest
 
-import geff.networkx
+import geff.networkx as geff_nx
 
 node_dtypes = ["int8", "uint8", "int16", "uint16"]
 node_attr_dtypes = [
@@ -55,9 +55,9 @@ def test_read_write_consistency(tmpdir, node_dtype, node_attr_dtypes, edge_attr_
 
     path = tmpdir / "rw_consistency.zarr/graph"
 
-    geff.networkx.write(graph, "position", path)
+    geff_nx.write(graph, "position", path)
 
-    compare = geff.networkx.read(path)
+    compare = geff_nx.read(path)
 
     assert set(graph.nodes) == set(compare.nodes)
     assert set(graph.edges) == set(compare.edges)
