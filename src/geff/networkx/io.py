@@ -1,6 +1,7 @@
+from __future__ import annotations
+
 import warnings
-from pathlib import Path
-from typing import Optional
+from typing import TYPE_CHECKING
 
 import networkx as nx
 import numpy as np
@@ -9,6 +10,9 @@ import zarr
 import geff
 import geff.utils
 from geff.metadata_schema import GeffMetadata
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def get_roi(graph: nx.Graph, position_attr: str) -> tuple[tuple[float, ...], tuple[float, ...]]:
@@ -66,8 +70,8 @@ def write(
     graph: nx.Graph,
     position_attr: str,
     path: str | Path,
-    axis_names: Optional[list[str]] = None,
-    axis_units: Optional[list[str]] = None,
+    axis_names: list[str] | None = None,
+    axis_units: list[str] | None = None,
 ):
     """Write a networkx graph to the geff file format
 
@@ -87,7 +91,7 @@ def write(
     # open/create zarr container
     group = zarr.open(path, "a")
 
-    # write meta-data
+    # write meta-datajj
     group.attrs["geff_version"] = geff.__version__
     group.attrs["position_attr"] = position_attr
     group.attrs["directed"] = isinstance(graph, nx.DiGraph)
