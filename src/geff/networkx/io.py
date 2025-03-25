@@ -7,6 +7,8 @@ import numpy as np
 import zarr
 
 import geff
+import geff.utils
+from geff.metadata_schema import GeffMetadata
 
 
 def get_roi(graph: nx.Graph, position_attr: str) -> tuple[tuple[float, ...], tuple[float, ...]]:
@@ -86,10 +88,12 @@ def write(
     group = zarr.open(path, "a")
 
     # write meta-data
-    group.attrs["geff_spec"] = geff.__version__
+    group.attrs["geff_version"] = geff.__version__
     group.attrs["position_attr"] = position_attr
     group.attrs["directed"] = isinstance(graph, nx.DiGraph)
-    group.attrs["roi"] = get_roi(graph, position_attr=position_attr)
+    roi_min, roi_max = get_roi(graph, position_attr=position_attr)
+    group.attrs["roi_min"] = roi_min
+    group.attrs["roi_max"] = roi_max
     if axis_names:
         graph.attrs["axis_names"] = axis_names
     if axis_units:
@@ -117,7 +121,7 @@ def write(
         group[f"edges/attrs/{name}"] = np.array([graph.edges[edge][name] for edge in edges_list])
 
 
-def read(path: Path) -> nx.Graph:
+def read(path: Path | str, validate: bool = True) -> nx.Graph:
     """Read a geff file into a networkx graph.
 
     Args:
@@ -127,15 +131,14 @@ def read(path: Path) -> nx.Graph:
         nx.Graph: The graph that was stored in the geff file format
     """
     # open zarr container
-    path = Path(path)
-    assert path.exists(), f"Cannot read graph from {path} because it does not exist"
-    group = zarr.open(path, "r")
+    if validate:
+        geff.utils.validate(path)
 
-    # TODO: validate the metadata using the schema
+    group = zarr.open(path, "r")
+    metadata = GeffMetadata(**group.attrs)
 
     # read meta-data
-    directed = group.attrs["directed"]
-    graph = nx.DiGraph() if directed else nx.Graph()
+    graph = nx.DiGraph() if metadata.directed else nx.Graph()
 
     nodes = group["nodes/ids"][:]
     graph.add_nodes_from(nodes.tolist())
