@@ -161,6 +161,7 @@ def read(path: Path | str, validate: bool = True) -> nx.Graph:
         ds = group[f"edges/attrs/{name}"]
         for edge, val in zip(edges, ds[:]):
             val = val.tolist() if val.size > 1 else val.item()
-            graph.edges[*edge.tolist()][name] = val
+            source, target = edge.tolist()
+            graph.edges[source, target][name] = val
 
     return graph
