@@ -164,7 +164,7 @@ exclude_lines = [
     "pass",
 ]
 [tool.coverage.run]
-source = ["traccuracy"]
+source = ["src/geff"]
 
 # https://github.com/mgedmin/check-manifest#configuration
 # [tool.check-manifest]
