@@ -70,6 +70,7 @@ build = { features = ["build"], solve-group = "default" }
 docs = { features = ["docs"], solve-group = "default"}
 networkx = {features=["networkx"], solve-group = "default"}
 dev-nx = { features = ["dev", "networkx"], solve-group = "default"}
+dev-all = { features = ["dev", "networkx", "spatial-graph"], solve-group = "default"}
 
 [tool.pixi.tasks]
 
