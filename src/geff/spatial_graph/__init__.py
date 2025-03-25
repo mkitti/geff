@@ -1,5 +1,5 @@
 try:
-    import spatial_graph  # noqa: F401
+    import spatial_graph
 except ImportError as err:
     raise ImportError(
         "The spatial_graph submodule depends on spatial-graph as an optional dependency. "

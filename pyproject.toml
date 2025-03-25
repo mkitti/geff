@@ -125,6 +125,7 @@ extend-ignore = [
 convention = "google"
 
 [tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]  # unused imports in init files
 "tests/*.py" = ["D", "S"]
 
 # https://docs.pytest.org/en/6.2.x/customize.html
