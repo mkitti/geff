@@ -8,26 +8,26 @@ from geff.metadata_schema import GeffMetadata, _get_versions_regex
 
 class TestVersionRegex:
     def test_get_versions_regex_simple(self):
-        version_str = "v0.0.1-a"
-        versions = ["v0.0"]
+        version_str = "0.0.1-a"
+        versions = ["0.0"]
         regex = _get_versions_regex(versions)
         assert re.match(regex, version_str) is not None
 
     def test_get_versions_regex_complex(self):
-        version_str = "v0.1.1-a"
-        versions = ["v0.0", "v0.1"]
+        version_str = "0.1.1-a"
+        versions = ["0.0", "0.1"]
         regex = _get_versions_regex(versions)
         assert re.match(regex, version_str) is not None
 
     def test_invalid_version_regex(self):
         version_str = "v1.0.1-a"
-        versions = ["v0.0", "v0.1"]
+        versions = ["0.0", "0.1"]
         regex = _get_versions_regex(versions)
         assert re.match(regex, version_str) is None
 
     def test_invalid_prefix_regex(self):
-        version_str = "981v0.0.1"
-        versions = ["v0.0", "v0.1"]
+        version_str = "9810.0.1"
+        versions = ["0.0", "0.1"]
         regex = _get_versions_regex(versions)
         assert re.match(regex, version_str) is None
 
@@ -35,17 +35,17 @@ class TestVersionRegex:
 class TestMetadataModel:
     def test_valid_init(self):
         model = GeffMetadata(
-            geff_version="v0.0.1",
+            geff_version="0.0.1",
             directed=True,
             roi_min=[0, 0, 0],
             roi_max=[100, 100, 100],
             axis_names=["t", "y", "x"],
             axis_units=["min", "nm", "nm"],
         )
-        assert model.geff_version == "v0.0.1"
+        assert model.geff_version == "0.0.1"
 
         model = GeffMetadata(
-            geff_version="v0.0.1",
+            geff_version="0.0.1",
             directed=True,
             roi_min=[0, 0, 0],
             roi_max=[100, 100, 100],
@@ -67,7 +67,7 @@ class TestMetadataModel:
     def test_invalid_roi(self):
         with pytest.raises(ValueError, match="Roi min .* is greater than max .* in dimension 0"):
             GeffMetadata(
-                geff_version="v0.0.1-a",
+                geff_version="0.0.1-a",
                 directed=False,
                 roi_min=[1000, 0, 0],
                 roi_max=[100, 100, 100],
@@ -79,7 +79,7 @@ class TestMetadataModel:
             match="Length of axis names",
         ):
             GeffMetadata(
-                geff_version="v0.0.1-a",
+                geff_version="0.0.1-a",
                 directed=False,
                 roi_min=[0, 0, 0],
                 roi_max=[100, 100, 100],
@@ -92,7 +92,7 @@ class TestMetadataModel:
             match="Length of axis units",
         ):
             GeffMetadata(
-                geff_version="v0.0.1-a",
+                geff_version="0.0.1-a",
                 directed=False,
                 roi_min=[0, 0, 0],
                 roi_max=[100, 100, 100],
@@ -103,7 +103,7 @@ class TestMetadataModel:
     def test_extra_attrs(self):
         # Should not fail
         GeffMetadata(
-            geff_version="v0.0.1",
+            geff_version="0.0.1",
             directed=True,
             roi_min=[0, 0, 0],
             roi_max=[100, 100, 100],

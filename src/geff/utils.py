@@ -1,23 +1,26 @@
+from __future__ import annotations
+
 import os
+from typing import TYPE_CHECKING
 
 import zarr
 
 from .metadata_schema import GeffMetadata
 
+if TYPE_CHECKING:
+    from pathlib import Path
 
-def validate(path: str):
+
+def validate(path: str | Path):
     """Check that the structure of the zarr conforms to geff specification
 
     Args:
-        path (str): Path to geff zarr
+        path (str | Path): Path to geff zarr
     """
     # Check that directory exists
     assert os.path.exists(path), f"Directory {path} does not exist"
 
-    z = zarr.open(path, mode="r")
-
-    assert "graph" in z, "geff zarr must contain a graph group"
-    graph = z["graph"]
+    graph = zarr.open(path, mode="r")
 
     # graph attrs validation
     # Raises pydantic.ValidationError or ValueError

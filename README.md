@@ -21,4 +21,9 @@ To use geff with the `spatial-graph` backend
 ```
 pip install geff[spatial-graph]
 ```
+
+To use geff with the `networkx` backend
+```
+pip install geff[networkx]
+```
 <!--intro-end-->
