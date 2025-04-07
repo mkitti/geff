@@ -4,7 +4,7 @@ import networkx as nx
 import numpy as np
 import zarr
 
-from geff.networkx import write
+from geff.networkx import read, write
 from geff.utils import validate
 
 
@@ -55,6 +55,6 @@ def test_sparse_node_attrs(tmp_path):
     np.testing.assert_array_almost_equal(score_mask, np.array([0, 0, 1, 1, 0]))
 
     # read it back in and check for consistency
-    # read_graph = read(zarr_path)
-    # for node, data in graph.nodes(data=True):
-    #     assert read_graph.nodes[node] == data
+    read_graph = read(zarr_path)
+    for node, data in graph.nodes(data=True):
+        assert read_graph.nodes[node] == data

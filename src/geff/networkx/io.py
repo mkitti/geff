@@ -165,22 +165,39 @@ def read(path: Path | str, validate: bool = True) -> nx.Graph:
 
     nodes = group["nodes/ids"][:]
     graph.add_nodes_from(nodes.tolist())
-    edges = group["edges/ids"][:]
-    graph.add_edges_from(edges.tolist())
 
     # collect node attributes
     for name in group["nodes/attrs"]:
-        ds = group[f"nodes/attrs/{name}"]
-        for node, val in zip(nodes, ds[:]):
-            val = val.tolist() if val.size > 1 else val.item()
-            graph.nodes[node.item()][name] = val
+        attr_group = group[f"nodes/attrs/{name}"]
+        values = attr_group["values"][:]
+        sparse = "missing" in attr_group.array_keys()
+        if sparse:
+            missing = attr_group["missing"][:]
+        for idx in range(len(nodes)):
+            node = nodes[idx]
+            val = values[idx]
+            ignore = missing[idx] if sparse else False
+            if not ignore:
+                val = val.tolist() if val.size > 1 else val.item()
+                graph.nodes[node.item()][name] = val
 
-    # collect edge attributes]
-    for name in group["edges/attrs"]:
-        ds = group[f"edges/attrs/{name}"]
-        for edge, val in zip(edges, ds[:]):
-            val = val.tolist() if val.size > 1 else val.item()
-            source, target = edge.tolist()
-            graph.edges[source, target][name] = val
+    if "edges" in group.group_keys():
+        edges = group["edges/ids"][:]
+        graph.add_edges_from(edges.tolist())
+
+        # collect edge attributes
+        for name in group["edges/attrs"]:
+            attr_group = group[f"edges/attrs/{name}"]
+            values = attr_group["values"][:]
+            if sparse:
+                missing = attr_group["missing"][:]
+            for idx in range(edges.shape[0]):
+                edge = edges[idx]
+                val = values[idx]
+                ignore = missing[idx] if sparse else False
+                if not ignore:
+                    val = val.tolist() if val.size > 1 else val.item()
+                    source, target = edge.tolist()
+                    graph.edges[source, target][name] = val
 
     return graph
