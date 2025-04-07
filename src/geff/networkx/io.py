@@ -114,15 +114,34 @@ def write(
 
     # write node attributes
     for name in get_node_attrs(graph):
-        # TODO: handle missing values
-        group[f"nodes/attrs/{name}"] = np.array([graph.nodes[node][name] for node in nodes_list])
+        values = []
+        missing = []
+        for node in nodes_list:
+            if name in graph.nodes[node]:
+                value = graph.nodes[node][name]
+                mask = 0
+            else:
+                if name == position_attr:
+                    raise ValueError(f"Missing position attr for node {node}")
+                value = 0
+                mask = 1
+            values.append(value)
+            missing.append(mask)
+        if name == position_attr:
+            name = "position"
+        else:
+            group[f"nodes/attrs/{name}/missing"] = np.array(missing, dtype=bool)
+        group[f"nodes/attrs/{name}/values"] = np.array(values)
 
     # write edges
-    group["edges/ids"] = edges_arr
+    if len(edges_list) > 0:
+        group["edges/ids"] = edges_arr
 
-    # write edge attributes
-    for name in get_edge_attrs(graph):
-        group[f"edges/attrs/{name}"] = np.array([graph.edges[edge][name] for edge in edges_list])
+        # write edge attributes
+        for name in get_edge_attrs(graph):
+            group[f"edges/attrs/{name}"] = np.array(
+                [graph.edges[edge][name] for edge in edges_list]
+            )
 
 
 def read(path: Path | str, validate: bool = True) -> nx.Graph:
