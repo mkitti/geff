@@ -58,32 +58,32 @@ def validate(path: str | Path):
                 f"does not match id length {id_len}"
             )
 
-    assert "edges" in graph, "graph group must contain an edge group"
-    edges = graph["edges"]
+    if "edges" in graph.group_keys():
+        edges = graph["edges"]
 
-    # Edges only require ids which contain nodes for each edge
-    assert "ids" in edges, "edge group must contain ids array"
-    id_shape = edges["ids"].shape
-    assert (
-        id_shape[-1] == 2
-    ), f"edges ids must have a last dimension of size 2, received shape {id_shape}"
+        # Edges only require ids which contain nodes for each edge
+        assert "ids" in edges, "edge group must contain ids array"
+        id_shape = edges["ids"].shape
+        assert (
+            id_shape[-1] == 2
+        ), f"edges ids must have a last dimension of size 2, received shape {id_shape}"
 
-    # Edge attribute array length should match edge id length
-    edge_id_len = edges["ids"].shape[0]
-    if "attrs" in edges:
-        for attr in edges["attrs"].keys():
-            attr_group = edges["attrs"][attr]
-            assert (
-                "values" in attr_group.array_keys()
-            ), f"Edge attribute group {attr} must have values group"
-            attr_len = attr_group["values"].shape[0]
-            assert attr_len == edge_id_len, (
-                f"Edge attribute {attr} values has length {attr_len}, which does not "
-                f"match id length {edge_id_len}"
-            )
-            if "missing" in attr_group.array_keys():
-                missing_len = attr_group["missing"].shape[0]
-                assert missing_len == edge_id_len, (
-                    f"Edge attribute {attr} missing mask has length {missing_len}, "
-                    f"which does not match id length {edge_id_len}"
+        # Edge attribute array length should match edge id length
+        edge_id_len = edges["ids"].shape[0]
+        if "attrs" in edges:
+            for attr in edges["attrs"].keys():
+                attr_group = edges["attrs"][attr]
+                assert (
+                    "values" in attr_group.array_keys()
+                ), f"Edge attribute group {attr} must have values group"
+                attr_len = attr_group["values"].shape[0]
+                assert attr_len == edge_id_len, (
+                    f"Edge attribute {attr} values has length {attr_len}, which does not "
+                    f"match id length {edge_id_len}"
                 )
+                if "missing" in attr_group.array_keys():
+                    missing_len = attr_group["missing"].shape[0]
+                    assert missing_len == edge_id_len, (
+                        f"Edge attribute {attr} missing mask has length {missing_len}, "
+                        f"which does not match id length {edge_id_len}"
+                    )

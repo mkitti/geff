@@ -46,16 +46,13 @@ def test_validate(tmpdir):
     ):
         validate(zpath)
     z["nodes"].create_dataset("attrs/position/values", shape=(n_node))
+    validate(zpath)
 
     # valid and invalid "missing" arrays for position attribute
     z["nodes"].create_dataset("attrs/position/missing", shape=(n_node), dtype=bool)
     with pytest.raises(AssertionError, match="position group cannot have missing values"):
         validate(zpath)
     del z["nodes/attrs/position"]["missing"]
-
-    # Edges missing (which means that the missing array with all zeros is fine)
-    with pytest.raises(AssertionError, match="graph group must contain an edge group"):
-        validate(zpath)
 
     # Attr shape mismatch
     z["nodes"].create_dataset("attrs/badshape/values", shape=(n_node * 2))
@@ -82,9 +79,7 @@ def test_validate(tmpdir):
         validate(zpath)
     del z["nodes/attrs"]["badshape"]
 
-    # Edges missing
-    with pytest.raises(AssertionError, match="graph group must contain an edge group"):
-        validate(zpath)
+    # No edge group is okay, if the graph has no edges
     z.create_group("edges")
 
     # Missing edge ids
