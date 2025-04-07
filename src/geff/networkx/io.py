@@ -85,13 +85,13 @@ def write(
         axis_units (Optional[list[str]], optional): The units of the spatial dims
             represented in position attribute. Defaults to None.
     """
-    if nx.is_empty(graph):
+    if graph.number_of_nodes() == 0:
         warnings.warn(f"Graph is empty - not writing anything to {path}", stacklevel=2)
         return
     # open/create zarr container
     group = zarr.open(path, "a")
 
-    # write meta-datajj
+    # write meta-data
     group.attrs["geff_version"] = geff.__version__
     group.attrs["position_attr"] = position_attr
     group.attrs["directed"] = isinstance(graph, nx.DiGraph)
