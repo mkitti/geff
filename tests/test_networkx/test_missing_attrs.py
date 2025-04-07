@@ -27,6 +27,22 @@ def graph_sparse_node_attrs():
     return graph
 
 
+def graph_sparse_edge_attrs():
+    graph = graph_sparse_node_attrs()
+    edges = [
+        [1, 3],
+        [1, 4],
+        [2, 5],
+    ]
+    edge_scores = [0.1, None, 0.5]
+    for edge, score in zip(edges, edge_scores):
+        if score is not None:
+            graph.add_edge(edge[0], edge[1], score=score)
+        else:
+            graph.add_edge(edge[0], edge[1])
+    return graph
+
+
 def test_sparse_node_attrs(tmp_path):
     zarr_path = Path(tmp_path) / "test.zarr"
     graph = graph_sparse_node_attrs()
@@ -58,3 +74,26 @@ def test_sparse_node_attrs(tmp_path):
     read_graph = read(zarr_path)
     for node, data in graph.nodes(data=True):
         assert read_graph.nodes[node] == data
+
+
+def test_sparse_edge_attrs(tmp_path):
+    zarr_path = Path(tmp_path) / "test.zarr"
+    graph = graph_sparse_edge_attrs()
+    write(graph, position_attr="position", path=zarr_path)
+    # check that the written thing is valid
+    assert Path(zarr_path).exists()
+    validate(zarr_path)
+
+    zroot = zarr.open(zarr_path, mode="r")
+    edge_attrs = zroot["edges"]["attrs"]
+    scores = edge_attrs["score"]["values"][:]
+    assert scores[0] == 0.1
+    assert scores[2] == 0.5
+
+    score_mask = edge_attrs["score"]["missing"][:]
+    np.testing.assert_array_almost_equal(score_mask, np.array([0, 1, 0]))
+
+    # read it back in and check for consistency
+    read_graph = read(zarr_path)
+    for u, v, data in graph.edges(data=True):
+        assert read_graph.edges[u, v] == data

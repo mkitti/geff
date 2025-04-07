@@ -139,9 +139,21 @@ def write(
 
         # write edge attributes
         for name in get_edge_attrs(graph):
-            group[f"edges/attrs/{name}"] = np.array(
-                [graph.edges[edge][name] for edge in edges_list]
-            )
+            values = []
+            missing = []
+            for edge in edges_list:
+                if name in graph.edges[edge]:
+                    value = graph.edges[edge][name]
+                    mask = 0
+                else:
+                    if name == position_attr:
+                        raise ValueError(f"Missing position attr for edge {edge}")
+                    value = 0
+                    mask = 1
+                values.append(value)
+                missing.append(mask)
+            group[f"edges/attrs/{name}/missing"] = np.array(missing, dtype=bool)
+            group[f"edges/attrs/{name}/values"] = np.array(values)
 
 
 def read(path: Path | str, validate: bool = True) -> nx.Graph:
