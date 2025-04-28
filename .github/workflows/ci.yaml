@@ -15,26 +15,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test-agnostic:
+  tests:
     uses: ./.github/workflows/test.yaml
     with:
-      test-target: "tests/test_agnostic"
+      test-target: "tests"
       witty-cache: false
       install-extras: "dev"
-  
-  test-networkx:
-    uses: ./.github/workflows/test.yaml
-    with:
-      test-target: "tests/test_networkx"
-      witty-cache: false
-      install-extras: "dev,networkx"
-
-  test-spatial-graph:
-    uses: ./.github/workflows/test.yaml
-    with:
-      test-target: "tests/test_spatial_graph"
-      witty-cache: true
-      install-extras: "dev,spatial-graph"
 
   schema:
     name: Check json schema
