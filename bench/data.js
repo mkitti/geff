@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1746133689300,
+  "lastUpdate": 1746134014650,
   "repoUrl": "https://github.com/live-image-tracking-tools/geff",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -135,6 +135,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.4369738380750813",
             "extra": "mean: 16.19019876399999 sec\nrounds: 3"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "malinmayorc@janelia.hhmi.org",
+            "name": "Caroline Malin-Mayor",
+            "username": "cmalinmayor"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ad9bbd4ef1acbe698b326f2ea5c0d062baaa5a47",
+          "message": "Remove spatial graph from README and PR template (#46)\n\n* Remove spatial graph from README and PR template\n\n* Update links in pyproject.toml\n\n---------\n\nCo-authored-by: Morgan Schwartz <msschwartz21@gmail.com>",
+          "timestamp": "2025-05-01T17:10:53-04:00",
+          "tree_id": "8e28aeef5b5dae8f6dc8331a7238a9437f00d5bf",
+          "url": "https://github.com/live-image-tracking-tools/geff/commit/ad9bbd4ef1acbe698b326f2ea5c0d062baaa5a47"
+        },
+        "date": 1746134014071,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_write",
+            "value": 0.1317593000588966,
+            "unit": "iter/sec",
+            "range": "stddev: 0.06036641119597091",
+            "extra": "mean: 7.589597087666665 sec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_validate",
+            "value": 39.8007584645015,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0006109597631318234",
+            "extra": "mean: 25.125149333319996 msec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_read",
+            "value": 0.06231025220596681,
+            "unit": "iter/sec",
+            "range": "stddev: 0.48398951712292115",
+            "extra": "mean: 16.04872335766666 sec\nrounds: 3"
           }
         ]
       }
