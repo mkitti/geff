@@ -13,7 +13,8 @@ permissions:
   deployments: write
 
 env:
-    TAG: ${{ contains(github.ref, 'tags') && 'latest' || 'dev'}}
+  TAG: ${{ contains(github.ref, 'tags') && 'latest' || 'dev'}}
+  SETUPTOOLS_SCM_PRETEND_VERSION: "0.0"
 
 jobs:
   push-docs:
