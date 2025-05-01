@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1746132040555,
+  "lastUpdate": 1746133689300,
   "repoUrl": "https://github.com/live-image-tracking-tools/geff",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -90,6 +90,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.5359005540661197",
             "extra": "mean: 15.929411636666666 sec\nrounds: 3"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "msschwartz21@gmail.com",
+            "name": "Morgan Schwartz",
+            "username": "msschwartz21"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "166920974c144529053966346346a5647e25b126",
+          "message": "Add support for zarr 2 and 3 (#42)\n\n* Add support for zarr 2 and 3\n\n* Try fixing zarr install\n\n* Update test function for zarr 3 syntax\n\n* Resolve zarr deprecation warnings\n\n* Skip testing zarr 3 on python 3.10\n\n* Make test code  work with zarr 2 and 3\n\n* Use tmp_path instead of tmpdir in tests\n\n* Review feedback\n\n* Remove cast to string because Paths are supported\n\n* Get tests to pass\n\n* Use Path in benchmark functions\n\n---------\n\nCo-authored-by: Caroline Malin-Mayor <malinmayorc@janelia.hhmi.org>",
+          "timestamp": "2025-05-01T17:05:36-04:00",
+          "tree_id": "a0857db0c9337601abe9297e2a7ff7a7193f8d6b",
+          "url": "https://github.com/live-image-tracking-tools/geff/commit/166920974c144529053966346346a5647e25b126"
+        },
+        "date": 1746133688502,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_write",
+            "value": 0.13230598755983364,
+            "unit": "iter/sec",
+            "range": "stddev: 0.017444794270241534",
+            "extra": "mean: 7.558236920666673 sec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_validate",
+            "value": 41.323413161317305,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0009082148047173535",
+            "extra": "mean: 24.199356333326705 msec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_read",
+            "value": 0.061765764248896564,
+            "unit": "iter/sec",
+            "range": "stddev: 0.4369738380750813",
+            "extra": "mean: 16.19019876399999 sec\nrounds: 3"
           }
         ]
       }
