@@ -67,7 +67,6 @@ class GeffMetadata(BaseModel):
 
         Args:
             group (zarr.Group | Path): The geff group to write the metadata to
-            metadata (GeffMetadata): The geff metadata to write.
         """
         if isinstance(group, Path):
             group = zarr.open(group)

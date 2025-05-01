@@ -88,7 +88,7 @@ def write(
             represented in position attribute. Defaults to None. Will override value
             in graph attributes if provided.
         validate (bool, optional): Flag indicating whether to perform validation on the
-            newtorkx graph before writing anything to disk. If set to False and there are
+            networkx graph before writing anything to disk. If set to False and there are
             missing attributes, will likely fail with a KeyError, leading to an incomplete
             graph written to disk. Defaults to True.
     """
