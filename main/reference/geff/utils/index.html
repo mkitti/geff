@@ -764,7 +764,44 @@
 <span class="normal">49</span>
 <span class="normal">50</span>
 <span class="normal">51</span>
-<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">):</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check that the structure of the zarr conforms to geff specification</span>
 
 <span class="sd">    Args:</span>
@@ -783,26 +820,63 @@
     <span class="n">nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;nodes&quot;</span><span class="p">]</span>
 
     <span class="c1"># ids and attrs/position are required and should be same length</span>
-    <span class="k">assert</span> <span class="s2">&quot;ids&quot;</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">,</span> <span class="s2">&quot;nodes group must contain an ids array&quot;</span>
-    <span class="k">assert</span> <span class="s2">&quot;attrs/position&quot;</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">,</span> <span class="s2">&quot;nodes group must contain an attrs/position array&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;ids&quot;</span> <span class="ow">in</span> <span class="n">nodes</span><span class="o">.</span><span class="n">array_keys</span><span class="p">(),</span> <span class="s2">&quot;nodes group must contain an ids array&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;attrs&quot;</span> <span class="ow">in</span> <span class="n">nodes</span><span class="o">.</span><span class="n">group_keys</span><span class="p">(),</span> <span class="s2">&quot;nodes group must contain an attrs group&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;position&quot;</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;attrs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">group_keys</span><span class="p">(),</span> <span class="p">(</span>
+        <span class="s2">&quot;nodes group must contain an attrs/position group&quot;</span>
+    <span class="p">)</span>
+    <span class="k">assert</span> <span class="s2">&quot;missing&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;attrs/position&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">array_keys</span><span class="p">(),</span> <span class="p">(</span>
+        <span class="s2">&quot;position group cannot have missing values&quot;</span>
+    <span class="p">)</span>
 
     <span class="c1"># Attribute array length should match id length</span>
+    <span class="n">id_len</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;ids&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;attrs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="n">attr_len</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;attrs&quot;</span><span class="p">][</span><span class="n">attr</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">id_len</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;ids&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">attr_group</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;attrs&quot;</span><span class="p">][</span><span class="n">attr</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="s2">&quot;values&quot;</span> <span class="ow">in</span> <span class="n">attr_group</span><span class="o">.</span><span class="n">array_keys</span><span class="p">(),</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;node attribute group </span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> must have values group&quot;</span>
+        <span class="p">)</span>
+        <span class="n">attr_len</span> <span class="o">=</span> <span class="n">attr_group</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">assert</span> <span class="n">attr_len</span> <span class="o">==</span> <span class="n">id_len</span><span class="p">,</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Node attribute </span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> has length </span><span class="si">{</span><span class="n">attr_len</span><span class="si">}</span><span class="s2">, which does not match id length </span><span class="si">{</span><span class="n">id_len</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Node attribute </span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> values has length </span><span class="si">{</span><span class="n">attr_len</span><span class="si">}</span><span class="s2">, which does not match &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;id length </span><span class="si">{</span><span class="n">id_len</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;missing&quot;</span> <span class="ow">in</span> <span class="n">attr_group</span><span class="o">.</span><span class="n">array_keys</span><span class="p">():</span>
+            <span class="n">missing_len</span> <span class="o">=</span> <span class="n">attr_group</span><span class="p">[</span><span class="s2">&quot;missing&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">assert</span> <span class="n">missing_len</span> <span class="o">==</span> <span class="n">id_len</span><span class="p">,</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Node attribute </span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> missing mask has length </span><span class="si">{</span><span class="n">missing_len</span><span class="si">}</span><span class="s2">, which &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;does not match id length </span><span class="si">{</span><span class="n">id_len</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;edges&quot;</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">group_keys</span><span class="p">():</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;edges&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Edges only require ids which contain nodes for each edge</span>
+        <span class="k">assert</span> <span class="s2">&quot;ids&quot;</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">,</span> <span class="s2">&quot;edge group must contain ids array&quot;</span>
+        <span class="n">id_shape</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="s2">&quot;ids&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">assert</span> <span class="n">id_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;edges ids must have a last dimension of size 2, received shape </span><span class="si">{</span><span class="n">id_shape</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span>
 
-    <span class="k">assert</span> <span class="s2">&quot;edges&quot;</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">,</span> <span class="s2">&quot;graph group must contain an edge group&quot;</span>
-    <span class="n">edges</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="s2">&quot;edges&quot;</span><span class="p">]</span>
-
-    <span class="c1"># Edges only require ids which contain nodes for each edge</span>
-    <span class="k">assert</span> <span class="s2">&quot;ids&quot;</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">,</span> <span class="s2">&quot;edge group must contain ids array&quot;</span>
-    <span class="n">id_shape</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="s2">&quot;ids&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
-    <span class="k">assert</span> <span class="n">id_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;edges ids must have a last dimension of size 2, received shape </span><span class="si">{</span><span class="n">id_shape</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="p">)</span>
+        <span class="c1"># Edge attribute array length should match edge id length</span>
+        <span class="n">edge_id_len</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="s2">&quot;ids&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s2">&quot;attrs&quot;</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">[</span><span class="s2">&quot;attrs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">attr_group</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="s2">&quot;attrs&quot;</span><span class="p">][</span><span class="n">attr</span><span class="p">]</span>
+                <span class="k">assert</span> <span class="s2">&quot;values&quot;</span> <span class="ow">in</span> <span class="n">attr_group</span><span class="o">.</span><span class="n">array_keys</span><span class="p">(),</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Edge attribute group </span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> must have values group&quot;</span>
+                <span class="p">)</span>
+                <span class="n">attr_len</span> <span class="o">=</span> <span class="n">attr_group</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">assert</span> <span class="n">attr_len</span> <span class="o">==</span> <span class="n">edge_id_len</span><span class="p">,</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Edge attribute </span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> values has length </span><span class="si">{</span><span class="n">attr_len</span><span class="si">}</span><span class="s2">, which does not &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;match id length </span><span class="si">{</span><span class="n">edge_id_len</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;missing&quot;</span> <span class="ow">in</span> <span class="n">attr_group</span><span class="o">.</span><span class="n">array_keys</span><span class="p">():</span>
+                    <span class="n">missing_len</span> <span class="o">=</span> <span class="n">attr_group</span><span class="p">[</span><span class="s2">&quot;missing&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">assert</span> <span class="n">missing_len</span> <span class="o">==</span> <span class="n">edge_id_len</span><span class="p">,</span> <span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Edge attribute </span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> missing mask has length </span><span class="si">{</span><span class="n">missing_len</span><span class="si">}</span><span class="s2">, &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;which does not match id length </span><span class="si">{</span><span class="n">edge_id_len</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>

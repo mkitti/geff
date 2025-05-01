@@ -1284,46 +1284,41 @@ the geff  metadata</p>
 
             <details class="quote">
               <summary>Source code in <code>src/geff/networkx/io.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="n">validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">:</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="n">validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a geff file into a networkx graph.</span>
 
 <span class="sd">    Args:</span>
@@ -1344,23 +1339,18 @@ the geff  metadata</p>
 
     <span class="n">nodes</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s2">&quot;nodes/ids&quot;</span><span class="p">][:]</span>
     <span class="n">graph</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-    <span class="n">edges</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s2">&quot;edges/ids&quot;</span><span class="p">][:]</span>
-    <span class="n">graph</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 
     <span class="c1"># collect node attributes</span>
     <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">group</span><span class="p">[</span><span class="s2">&quot;nodes/attrs&quot;</span><span class="p">]:</span>
-        <span class="n">ds</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;nodes/attrs/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">ds</span><span class="p">[:]):</span>
-            <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">val</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-            <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">item</span><span class="p">()][</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="n">_set_attribute_values</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="c1"># collect edge attributes]</span>
-    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">group</span><span class="p">[</span><span class="s2">&quot;edges/attrs&quot;</span><span class="p">]:</span>
-        <span class="n">ds</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;edges/attrs/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">edge</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">ds</span><span class="p">[:]):</span>
-            <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">val</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-            <span class="n">source</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-            <span class="n">graph</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">][</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="k">if</span> <span class="s2">&quot;edges&quot;</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">group_keys</span><span class="p">():</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s2">&quot;edges/ids&quot;</span><span class="p">][:]</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+        <span class="c1"># collect edge attributes</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">group</span><span class="p">[</span><span class="s2">&quot;edges/attrs&quot;</span><span class="p">]:</span>
+            <span class="n">_set_attribute_values</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">graph</span>
 </code></pre></div></td></tr></table></div>
@@ -1495,7 +1485,39 @@ represented in position attribute. Defaults to None.</p>
 <span class="normal">122</span>
 <span class="normal">123</span>
 <span class="normal">124</span>
-<span class="normal">125</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span>
     <span class="n">graph</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">,</span>
     <span class="n">position_attr</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
@@ -1514,13 +1536,13 @@ represented in position attribute. Defaults to None.</p>
 <span class="sd">        axis_units (Optional[list[str]], optional): The units of the spatial dims</span>
 <span class="sd">            represented in position attribute. Defaults to None.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">nx</span><span class="o">.</span><span class="n">is_empty</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph is empty - not writing anything to </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
         <span class="k">return</span>
     <span class="c1"># open/create zarr container</span>
     <span class="n">group</span> <span class="o">=</span> <span class="n">zarr</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
 
-    <span class="c1"># write meta-datajj</span>
+    <span class="c1"># write meta-data</span>
     <span class="n">group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;geff_version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">geff</span><span class="o">.</span><span class="n">__version__</span>
     <span class="n">group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;position_attr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">position_attr</span>
     <span class="n">group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;directed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">)</span>
@@ -1543,15 +1565,47 @@ represented in position attribute. Defaults to None.</p>
 
     <span class="c1"># write node attributes</span>
     <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">get_node_attrs</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
-        <span class="c1"># TODO: handle missing values</span>
-        <span class="n">group</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;nodes/attrs/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="n">name</span><span class="p">]</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes_list</span><span class="p">])</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">missing</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="n">name</span><span class="p">]</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="n">position_attr</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing position attr for node </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">missing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+        <span class="c1"># Set position attribute to default &quot;position&quot;, original stored in metadata</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="n">position_attr</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;position&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Always store missing array even if all values are present</span>
+            <span class="n">group</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;nodes/attrs/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">/missing&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">missing</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="n">group</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;nodes/attrs/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">/values&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
 
     <span class="c1"># write edges</span>
-    <span class="n">group</span><span class="p">[</span><span class="s2">&quot;edges/ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">edges_arr</span>
+    <span class="c1"># Edge group is only created if edges are present on graph</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">group</span><span class="p">[</span><span class="s2">&quot;edges/ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">edges_arr</span>
 
-    <span class="c1"># write edge attributes</span>
-    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">get_edge_attrs</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
-        <span class="n">group</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;edges/attrs/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">graph</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">edge</span><span class="p">][</span><span class="n">name</span><span class="p">]</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges_list</span><span class="p">])</span>
+        <span class="c1"># write edge attributes</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">get_edge_attrs</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">missing</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges_list</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">edge</span><span class="p">]:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">edge</span><span class="p">][</span><span class="n">name</span><span class="p">]</span>
+                    <span class="n">mask</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="n">mask</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">missing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+            <span class="n">group</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;edges/attrs/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">/missing&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">missing</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+            <span class="n">group</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;edges/attrs/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">/values&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
