@@ -112,7 +112,7 @@ def test_validate(tmpdir):
         validate(zpath)
     del z["edges/attrs"]["badshape"]
 
-    # Attr shape mismatch
+    # Attr missing shape mismatch
     z["edges"].create_dataset("attrs/badshape/values", shape=(n_edges, 2))
     z["edges"].create_dataset("attrs/badshape/missing", shape=(n_edges * 2, 2))
     with pytest.raises(
