@@ -24,11 +24,11 @@ def graph_sparse_node_attrs():
             graph.add_node(node, position=pos, score=score)
         else:
             graph.add_node(node, position=pos)
-    return graph
+    return graph, positions
 
 
 def graph_sparse_edge_attrs():
-    graph = graph_sparse_node_attrs()
+    graph, _ = graph_sparse_node_attrs()
     edges = [
         [1, 3],
         [1, 4],
@@ -45,21 +45,13 @@ def graph_sparse_edge_attrs():
 
 def test_sparse_node_attrs(tmp_path):
     zarr_path = Path(tmp_path) / "test.zarr"
-    graph = graph_sparse_node_attrs()
+    graph, positions = graph_sparse_node_attrs()
     write(graph, position_attr="position", path=zarr_path)
     # check that the written thing is valid
     assert Path(zarr_path).exists()
     validate(zarr_path)
 
     zroot = zarr.open(zarr_path, mode="r")
-    positions = [
-        [0, 1, 2],
-        [0, 0, 0],
-        [1, 1, 3],
-        [1, 5, 2],
-        [1, 7, 6],
-    ]
-
     node_attrs = zroot["nodes"]["attrs"]
     pos = node_attrs["position"]["values"][:]
     np.testing.assert_array_almost_equal(np.array(positions), pos)

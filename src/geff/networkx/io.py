@@ -127,13 +127,16 @@ def write(
                 mask = 1
             values.append(value)
             missing.append(mask)
+        # Set position attribute to default "position", original stored in metadata
         if name == position_attr:
             name = "position"
         else:
+            # Always store missing array even if all values are present
             group[f"nodes/attrs/{name}/missing"] = np.array(missing, dtype=bool)
         group[f"nodes/attrs/{name}/values"] = np.array(values)
 
     # write edges
+    # Edge group is only created if edges are present on graph
     if len(edges_list) > 0:
         group["edges/ids"] = edges_arr
 
@@ -146,14 +149,47 @@ def write(
                     value = graph.edges[edge][name]
                     mask = 0
                 else:
-                    if name == position_attr:
-                        raise ValueError(f"Missing position attr for edge {edge}")
                     value = 0
                     mask = 1
                 values.append(value)
                 missing.append(mask)
             group[f"edges/attrs/{name}/missing"] = np.array(missing, dtype=bool)
             group[f"edges/attrs/{name}/values"] = np.array(values)
+
+
+def _set_attribute_values(
+    graph: nx.DiGraph, ids: np.ndarray, graph_group: zarr.Group, name: str, nodes: bool = True
+) -> None:
+    """Add attributes in-place to a networkx graph's nodes or edges.
+
+    Args:
+        graph (nx.DiGraph): The networkx graph, already populated with nodes or edges,
+            that needs attributes added
+        ids (np.ndarray): Node or edge ids from Geff. If nodes, 1D. If edges, 2D.
+        graph_group (zarr.Group): A zarr group holding the geff graph.
+        name (str): The name of the attribute
+        nodes (bool, optional): If True, extract and set node attributes.  If False,
+            extract and set edge attributes. Defaults to True.
+    """
+    element = "nodes" if nodes else "edges"
+    attr_group = graph_group[f"{element}/attrs/{name}"]
+    values = attr_group["values"][:]
+    sparse = "missing" in attr_group.array_keys()
+    if sparse:
+        missing = attr_group["missing"][:]
+    for idx in range(len(ids)):
+        _id = ids[idx]
+        val = values[idx]
+        # If attribute is sparse and missing for this node, skip setting attribute
+        ignore = missing[idx] if sparse else False
+        if not ignore:
+            # Get either individual item or list instead of setting with np.array
+            val = val.tolist() if val.size > 1 else val.item()
+            if nodes:
+                graph.nodes[_id.item()][name] = val
+            else:
+                source, target = _id.tolist()
+                graph.edges[source, target][name] = val
 
 
 def read(path: Path | str, validate: bool = True) -> nx.Graph:
@@ -180,18 +216,7 @@ def read(path: Path | str, validate: bool = True) -> nx.Graph:
 
     # collect node attributes
     for name in group["nodes/attrs"]:
-        attr_group = group[f"nodes/attrs/{name}"]
-        values = attr_group["values"][:]
-        sparse = "missing" in attr_group.array_keys()
-        if sparse:
-            missing = attr_group["missing"][:]
-        for idx in range(len(nodes)):
-            node = nodes[idx]
-            val = values[idx]
-            ignore = missing[idx] if sparse else False
-            if not ignore:
-                val = val.tolist() if val.size > 1 else val.item()
-                graph.nodes[node.item()][name] = val
+        _set_attribute_values(graph, nodes, group, name, nodes=True)
 
     if "edges" in group.group_keys():
         edges = group["edges/ids"][:]
@@ -199,17 +224,6 @@ def read(path: Path | str, validate: bool = True) -> nx.Graph:
 
         # collect edge attributes
         for name in group["edges/attrs"]:
-            attr_group = group[f"edges/attrs/{name}"]
-            values = attr_group["values"][:]
-            if sparse:
-                missing = attr_group["missing"][:]
-            for idx in range(edges.shape[0]):
-                edge = edges[idx]
-                val = values[idx]
-                ignore = missing[idx] if sparse else False
-                if not ignore:
-                    val = val.tolist() if val.size > 1 else val.item()
-                    source, target = edge.tolist()
-                    graph.edges[source, target][name] = val
+            _set_attribute_values(graph, edges, group, name, nodes=False)
 
     return graph
