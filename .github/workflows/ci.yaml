@@ -13,66 +13,46 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-env:
-  SETUPTOOLS_SCM_PRETEND_VERSION: "0.0"
 
 jobs:
-  test:
-    name: ${{ matrix.platform }} (${{ matrix.python-version }})
-    runs-on: ${{ matrix.platform }}
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.10", "3.11", "3.12"]
-        platform: [ubuntu-latest, macos-latest, windows-latest]
+  tests:
+    uses: ./.github/workflows/test.yaml
+    with:
+      test-target: "tests"
+      witty-cache: false
+      install-extras: "dev"
 
+  schema:
+    name: Check json schema
+    runs-on: ubuntu-latest
+    env:
+      testjson: check-json.json
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.12"
           cache-dependency-path: "pyproject.toml"
           cache: "pip"
 
       - name: Install dependencies
         run: |
           python -m pip install -U pip
-          python -m pip install -e .[dev,spatial-graph,networkx]
+          pip install .
 
-      - name: Get witty cache directory
-        id: cache-path
-        run: |
-          import Cython.Utils
-          import os
+      - name: Generate json 
+        run: python scripts/export_json_schema.py --filename $testjson
 
-          cache_path = os.path.join(Cython.Utils.get_cython_cache_dir(), "witty")
+      - run: cat $testjson
 
-          with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
-              print(f"path={cache_path}", file=fh)
-        shell: python
-
-      - name: Check for witty cache
-        uses: actions/cache/restore@v4
-        id: witty-cache
+      - name: Compare hashes
+        if: ${{ hashFiles( env.testjson ) != hashFiles('geff-schema.json') }}
+        uses: actions/github-script@v3
         with:
-          path: ${{ steps.cache-path.outputs.path }}
-          key: ${{ matrix.platform }} - ${{ matrix.python-version }}
-
-      - name: Test
-        run: pytest --color=yes --cov --cov-report=xml --cov-report=term-missing
-
-      - name: Coverage
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-
-      - name: Save witty cache
-        uses: actions/cache/save@v4
-        with:
-          path: ${{ steps.cache-path.outputs.path }}
-          key: ${{ matrix.platform }} - ${{ matrix.python-version }}
+          script: |
+              core.setFailed('geff-schema.json needs to be updated by locally running `pixi run update-json`. ${{ hashFiles( env.testjson ) }} vs ${{ hashFiles('geff-schema.json') }}')
 
   deploy:
     name: Deploy
@@ -95,6 +75,19 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+
+      - name: Install geff
+        run: pip install .
+
+      - run: echo ${{ github.ref_name }}
+
+      - name: Check supported_versions.yml
+        shell: python
+        run: |
+          import re; from geff.metadata_schema import SUPPORTED_VERSIONS_REGEX
+
+          if re.search(SUPPORTED_VERSIONS_REGEX, ${{ github.ref_name }}) is None:
+              return sys.exit("`supported_versions.yml`  needs to be updated to include new release ${{ github.ref_name }}")
 
       - name: 👷 Build
         run: |

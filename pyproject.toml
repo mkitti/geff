@@ -15,6 +15,8 @@ dependencies = [
     "zarr<3.0.0",
     "pydantic", 
     "pyyaml",
+    "numcodecs<0.16", # TODO: remove pin once the 16 release is stable
+    "networkx"
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -36,19 +38,14 @@ dev = [
     "ipython",
     "types-PyYAML",
 ]
-spatial-graph = [
-    "spatial-graph",
-]
 docs = [
     "mkdocs-material",
     "mkdocstrings[python]", 
     "mkdocs-api-autonav",
     "mkdocs-include-markdown-plugin",
-    "mike"
-]
-
-networkx = [
-    "networkx",
+    "mike",
+    "json-schema-for-humans",
+    "typing-extensions"  # Required for json-schema-for-humans 
 ]
 
 
@@ -65,14 +62,11 @@ python = "3.12.*"
 [tool.pixi.environments]
 default = { solve-group = "default" }
 dev = { features = ["dev"], solve-group = "default" }
-dev-sg = { features = ["dev", "spatial-graph"], solve-group = "default"}
 build = { features = ["build"], solve-group = "default" }
 docs = { features = ["docs"], solve-group = "default"}
-networkx = {features=["networkx"], solve-group = "default"}
-dev-nx = { features = ["dev", "networkx"], solve-group = "default"}
-dev-all = { features = ["dev", "networkx", "spatial-graph"], solve-group = "default"}
 
 [tool.pixi.tasks]
+update-json = "python scripts/export_json_schema.py"
 
 [tool.pixi.feature.dev.tasks]
 test = "pytest tests"
@@ -82,6 +76,10 @@ build = "*"
 
 [tool.pixi.feature.build.tasks]
 build = "python -m build"
+
+[tool.pixi.feature.docs.tasks]
+preview-docs = {cmd = "mkdocs serve", depends-on = "schema-docs"}
+schema-docs = "generate-schema-doc geff-schema.json docs/schema/schema.html"
 
 [project.urls]
 repository = "https://github.com/funkelab/geff"
