@@ -687,6 +687,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#geff.networkx.io.write(validate)" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-parameter"></code>&nbsp;validate
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -910,6 +919,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#geff.networkx.io.write(validate)" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-parameter"></code>&nbsp;validate
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -979,7 +997,7 @@
             <b><code><a class="autorefs autorefs-internal" title="            read (geff.networkx.io.read)" href="#geff.networkx.io.read">read</a></code></b>
             –
             <div class="doc-md-description">
-              <p>Read a geff file into a networkx graph.</p>
+              <p>Read a geff file into a networkx graph. Metadata attributes will be stored in</p>
             </div>
           </li>
           <li class="doc-section-item field-body">
@@ -1263,7 +1281,8 @@ spatial dim, and a tuple with the max values in each spatial dim</p>
 
     <div class="doc doc-contents ">
 
-        <p>Read a geff file into a networkx graph.</p>
+        <p>Read a geff file into a networkx graph. Metadata attributes will be stored in
+the graph attributes, accessed via <code>G.graph[key]</code> where G is a networkx graph.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1284,21 +1303,7 @@ the geff  metadata</p>
 
             <details class="quote">
               <summary>Source code in <code>src/geff/networkx/io.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">209</span>
 <span class="normal">210</span>
 <span class="normal">211</span>
 <span class="normal">212</span>
@@ -1318,8 +1323,26 @@ the geff  metadata</p>
 <span class="normal">226</span>
 <span class="normal">227</span>
 <span class="normal">228</span>
-<span class="normal">229</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="n">validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a geff file into a networkx graph.</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="n">validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a geff file into a networkx graph. Metadata attributes will be stored in</span>
+<span class="sd">    the graph attributes, accessed via `G.graph[key]` where G is a networkx graph.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        path (Path): The path to the root of the geff zarr, where the .attrs contains</span>
@@ -1332,10 +1355,12 @@ the geff  metadata</p>
         <span class="n">geff</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
     <span class="n">group</span> <span class="o">=</span> <span class="n">zarr</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
-    <span class="n">metadata</span> <span class="o">=</span> <span class="n">GeffMetadata</span><span class="p">(</span><span class="o">**</span><span class="n">group</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">GeffMetadata</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
 
     <span class="c1"># read meta-data</span>
     <span class="n">graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span> <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">directed</span> <span class="k">else</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">:</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
 
     <span class="n">nodes</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s2">&quot;nodes/ids&quot;</span><span class="p">][:]</span>
     <span class="n">graph</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
@@ -1367,7 +1392,7 @@ the geff  metadata</p>
 
 
 </h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">write</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">position_attr</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="n">axis_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">axis_units</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">write</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">position_attr</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="n">axis_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">axis_units</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1410,7 +1435,8 @@ so will only overwrite geff-controlled groups.</p>
           –
           <div class="doc-md-description">
             <p>The names of the spatial dims
-represented in position attribute. Defaults to None.</p>
+represented in position attribute. Defaults to None. Will override
+value in graph attributes if provided.</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
@@ -1421,7 +1447,21 @@ represented in position attribute. Defaults to None.</p>
           –
           <div class="doc-md-description">
             <p>The units of the spatial dims
-represented in position attribute. Defaults to None.</p>
+represented in position attribute. Defaults to None. Will override value
+in graph attributes if provided.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+<h3 id="geff.networkx.io.write(validate)" class="doc doc-heading doc-heading-parameter">              <b><code>validate</code></b>
+</h3>              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>, default:
+                  <code>True</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Flag indicating whether to perform validation on the
+networkx graph before writing anything to disk. If set to False and there are
+missing attributes, will likely fail with a KeyError, leading to an incomplete
+graph written to disk. Defaults to True.</p>
           </div>
         </li>
     </ul>
@@ -1517,12 +1557,27 @@ represented in position attribute. Defaults to None.</p>
 <span class="normal">154</span>
 <span class="normal">155</span>
 <span class="normal">156</span>
-<span class="normal">157</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span>
     <span class="n">graph</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">,</span>
     <span class="n">position_attr</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
     <span class="n">axis_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">axis_units</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Write a networkx graph to the geff file format</span>
 
@@ -1532,9 +1587,15 @@ represented in position attribute. Defaults to None.</p>
 <span class="sd">        path (str | Path): the path to the output zarr. Opens in append mode,</span>
 <span class="sd">            so will only overwrite geff-controlled groups.</span>
 <span class="sd">        axis_names (Optional[list[str]], optional): The names of the spatial dims</span>
-<span class="sd">            represented in position attribute. Defaults to None.</span>
+<span class="sd">            represented in position attribute. Defaults to None. Will override</span>
+<span class="sd">            value in graph attributes if provided.</span>
 <span class="sd">        axis_units (Optional[list[str]], optional): The units of the spatial dims</span>
-<span class="sd">            represented in position attribute. Defaults to None.</span>
+<span class="sd">            represented in position attribute. Defaults to None. Will override value</span>
+<span class="sd">            in graph attributes if provided.</span>
+<span class="sd">        validate (bool, optional): Flag indicating whether to perform validation on the</span>
+<span class="sd">            networkx graph before writing anything to disk. If set to False and there are</span>
+<span class="sd">            missing attributes, will likely fail with a KeyError, leading to an incomplete</span>
+<span class="sd">            graph written to disk. Defaults to True.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph is empty - not writing anything to </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -1542,17 +1603,26 @@ represented in position attribute. Defaults to None.</p>
     <span class="c1"># open/create zarr container</span>
     <span class="n">group</span> <span class="o">=</span> <span class="n">zarr</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
 
-    <span class="c1"># write meta-data</span>
-    <span class="n">group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;geff_version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">geff</span><span class="o">.</span><span class="n">__version__</span>
-    <span class="n">group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;position_attr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">position_attr</span>
-    <span class="n">group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;directed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">)</span>
+    <span class="n">node_attrs</span> <span class="o">=</span> <span class="n">get_node_attrs</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">validate</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">position_attr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">node_attrs</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Position attribute </span><span class="si">{</span><span class="n">position_attr</span><span class="si">}</span><span class="s2"> not found in graph&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">position_attr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Node </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2"> does not have position attribute </span><span class="si">{</span><span class="n">position_attr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># write metadata</span>
     <span class="n">roi_min</span><span class="p">,</span> <span class="n">roi_max</span> <span class="o">=</span> <span class="n">get_roi</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">position_attr</span><span class="o">=</span><span class="n">position_attr</span><span class="p">)</span>
-    <span class="n">group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;roi_min&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">roi_min</span>
-    <span class="n">group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;roi_max&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">roi_max</span>
-    <span class="k">if</span> <span class="n">axis_names</span><span class="p">:</span>
-        <span class="n">graph</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;axis_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">axis_names</span>
-    <span class="k">if</span> <span class="n">axis_units</span><span class="p">:</span>
-        <span class="n">graph</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;axis_units&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">axis_units</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">GeffMetadata</span><span class="p">(</span>
+        <span class="n">geff_version</span><span class="o">=</span><span class="n">geff</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span>
+        <span class="n">directed</span><span class="o">=</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">),</span>
+        <span class="n">roi_min</span><span class="o">=</span><span class="n">roi_min</span><span class="p">,</span>
+        <span class="n">roi_max</span><span class="o">=</span><span class="n">roi_max</span><span class="p">,</span>
+        <span class="n">position_attr</span><span class="o">=</span><span class="n">position_attr</span><span class="p">,</span>
+        <span class="n">axis_names</span><span class="o">=</span><span class="n">axis_names</span> <span class="k">if</span> <span class="n">axis_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">graph</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;axis_names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="n">axis_units</span><span class="o">=</span><span class="n">axis_units</span> <span class="k">if</span> <span class="n">axis_units</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">graph</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;axis_units&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">metadata</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
 
     <span class="c1"># get node and edge IDs</span>
     <span class="n">nodes_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>
@@ -1564,7 +1634,7 @@ represented in position attribute. Defaults to None.</p>
     <span class="n">group</span><span class="p">[</span><span class="s2">&quot;nodes/ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes_arr</span>
 
     <span class="c1"># write node attributes</span>
-    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">get_node_attrs</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">node_attrs</span><span class="p">:</span>
         <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">missing</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes_list</span><span class="p">:</span>
@@ -1572,8 +1642,6 @@ represented in position attribute. Defaults to None.</p>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="n">name</span><span class="p">]</span>
                 <span class="n">mask</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="n">position_attr</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing position attr for node </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="n">mask</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
