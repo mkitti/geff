@@ -72,6 +72,7 @@ def write(
     path: str | Path,
     axis_names: list[str] | None = None,
     axis_units: list[str] | None = None,
+    zarr_format: int = 3,
     validate: bool = True,
 ):
     """Write a networkx graph to the geff file format
@@ -87,6 +88,8 @@ def write(
         axis_units (Optional[list[str]], optional): The units of the spatial dims
             represented in position attribute. Defaults to None. Will override value
             in graph attributes if provided.
+        zarr_format (Optional[int], optional): The version of zarr to write.
+            Defaults to 3.
         validate (bool, optional): Flag indicating whether to perform validation on the
             networkx graph before writing anything to disk. If set to False and there are
             missing attributes, will likely fail with a KeyError, leading to an incomplete
@@ -95,8 +98,12 @@ def write(
     if graph.number_of_nodes() == 0:
         warnings.warn(f"Graph is empty - not writing anything to {path}", stacklevel=2)
         return
+
     # open/create zarr container
-    group = zarr.open(path, "a")
+    if zarr.__version__.startswith("3"):
+        group = zarr.open(path, mode="a", zarr_format=zarr_format)
+    else:
+        group = zarr.open(path, mode="a")
 
     node_attrs = get_node_attrs(graph)
     if validate:
@@ -211,16 +218,19 @@ def read(path: Path | str, validate: bool = True) -> nx.Graph:
     the graph attributes, accessed via `G.graph[key]` where G is a networkx graph.
 
     Args:
-        path (Path): The path to the root of the geff zarr, where the .attrs contains
+        path (Path | str): The path to the root of the geff zarr, where the .attrs contains
             the geff  metadata
     Returns:
         nx.Graph: The graph that was stored in the geff file format
     """
+    # zarr python 3 doesn't support Path
+    path = str(path)
+
     # open zarr container
     if validate:
         geff.utils.validate(path)
 
-    group = zarr.open(path, "r")
+    group = zarr.open(path, mode="r")
     metadata = GeffMetadata.read(group)
 
     # read meta-data
