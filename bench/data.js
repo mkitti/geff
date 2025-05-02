@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1746195502177,
+  "lastUpdate": 1746195626485,
   "repoUrl": "https://github.com/live-image-tracking-tools/geff",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -315,6 +315,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.444083006084229",
             "extra": "mean: 16.078515509 sec\nrounds: 3"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "msschwartz21@gmail.com",
+            "name": "Morgan Schwartz",
+            "username": "msschwartz21"
+          },
+          "committer": {
+            "email": "msschwartz21@gmail.com",
+            "name": "Morgan Schwartz",
+            "username": "msschwartz21"
+          },
+          "distinct": true,
+          "id": "19e48ff054a6772cdaa3a11fdbf351ecfea6f4a3",
+          "message": "additional deploy action bugfix",
+          "timestamp": "2025-05-02T10:17:56-04:00",
+          "tree_id": "175b5d933262f7151b743521290e0e3eed602b68",
+          "url": "https://github.com/live-image-tracking-tools/geff/commit/19e48ff054a6772cdaa3a11fdbf351ecfea6f4a3"
+        },
+        "date": 1746195626015,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_write",
+            "value": 0.13204822954625095,
+            "unit": "iter/sec",
+            "range": "stddev: 0.08419713926622867",
+            "extra": "mean: 7.572990591666676 sec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_validate",
+            "value": 41.20163808372054,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0004680122384457904",
+            "extra": "mean: 24.27087966667803 msec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_read",
+            "value": 0.062197974193076495,
+            "unit": "iter/sec",
+            "range": "stddev: 0.4444821724850281",
+            "extra": "mean: 16.077694056333332 sec\nrounds: 3"
           }
         ]
       }
