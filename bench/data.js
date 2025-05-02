@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1746195083033,
+  "lastUpdate": 1746195502177,
   "repoUrl": "https://github.com/live-image-tracking-tools/geff",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -270,6 +270,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.7411778533321154",
             "extra": "mean: 16.49505156466667 sec\nrounds: 3"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "msschwartz21@gmail.com",
+            "name": "Morgan Schwartz",
+            "username": "msschwartz21"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "bf475bd96dd5a0b3d540febba23b51adcdfc6a2e",
+          "message": "Update dev notes and bugfix deploy action (#48)\n\n* Add notes about releases\n\n* Fix deploy action that checks that supported versions is up to date",
+          "timestamp": "2025-05-02T10:15:45-04:00",
+          "tree_id": "bfeb5b5f6ece9f1bdde7a9df04b541c0c58d12cf",
+          "url": "https://github.com/live-image-tracking-tools/geff/commit/bf475bd96dd5a0b3d540febba23b51adcdfc6a2e"
+        },
+        "date": 1746195501770,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_write",
+            "value": 0.13333210044399263,
+            "unit": "iter/sec",
+            "range": "stddev: 0.07667985222091646",
+            "extra": "mean: 7.500069350666678 sec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_validate",
+            "value": 40.514471668002614,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00112788319093007",
+            "extra": "mean: 24.68253833332786 msec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_read",
+            "value": 0.06219479649351004,
+            "unit": "iter/sec",
+            "range": "stddev: 0.444083006084229",
+            "extra": "mean: 16.078515509 sec\nrounds: 3"
           }
         ]
       }
