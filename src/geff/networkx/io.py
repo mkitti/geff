@@ -207,7 +207,11 @@ def _set_attribute_values(
             # Get either individual item or list instead of setting with np.array
             val = val.tolist() if val.size > 1 else val.item()
             if nodes:
-                graph.nodes[_id.item()][name] = val
+                if name == "position" and "position_attr" in graph.graph:
+                    graph_attr = graph.graph["position_attr"]
+                else:
+                    graph_attr = name
+                graph.nodes[_id.item()][graph_attr] = val
             else:
                 source, target = _id.tolist()
                 graph.edges[source, target][name] = val
