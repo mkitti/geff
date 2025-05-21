@@ -2,34 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://funkelab.github.io/geff/main/</loc>
-         <lastmod>2025-05-02</lastmod>
+         <lastmod>2025-05-21</lastmod>
     </url>
     <url>
          <loc>https://funkelab.github.io/geff/main/specification/</loc>
-         <lastmod>2025-05-02</lastmod>
+         <lastmod>2025-05-21</lastmod>
     </url>
     <url>
          <loc>https://funkelab.github.io/geff/main/what-is-geff/</loc>
-         <lastmod>2025-05-02</lastmod>
+         <lastmod>2025-05-21</lastmod>
     </url>
     <url>
          <loc>https://funkelab.github.io/geff/main/reference/geff/</loc>
-         <lastmod>2025-05-02</lastmod>
+         <lastmod>2025-05-21</lastmod>
     </url>
     <url>
          <loc>https://funkelab.github.io/geff/main/reference/geff/metadata_schema/</loc>
-         <lastmod>2025-05-02</lastmod>
+         <lastmod>2025-05-21</lastmod>
     </url>
     <url>
          <loc>https://funkelab.github.io/geff/main/reference/geff/networkx/</loc>
-         <lastmod>2025-05-02</lastmod>
+         <lastmod>2025-05-21</lastmod>
     </url>
     <url>
          <loc>https://funkelab.github.io/geff/main/reference/geff/networkx/io/</loc>
-         <lastmod>2025-05-02</lastmod>
+         <lastmod>2025-05-21</lastmod>
     </url>
     <url>
          <loc>https://funkelab.github.io/geff/main/reference/geff/utils/</loc>
-         <lastmod>2025-05-02</lastmod>
+         <lastmod>2025-05-21</lastmod>
     </url>
 </urlset>
