@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1747856291412,
+  "lastUpdate": 1747856417710,
   "repoUrl": "https://github.com/live-image-tracking-tools/geff",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -450,6 +450,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.4343135261786798",
             "extra": "mean: 16.153776074000024 sec\nrounds: 3"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "msschwartz21@gmail.com",
+            "name": "Morgan Schwartz",
+            "username": "msschwartz21"
+          },
+          "committer": {
+            "email": "msschwartz21@gmail.com",
+            "name": "Morgan Schwartz",
+            "username": "msschwartz21"
+          },
+          "distinct": true,
+          "id": "f2bad2252c408fa66f95d6f837ec014d38410490",
+          "message": "Remove env variable from github action so that deploy works correctly",
+          "timestamp": "2025-05-21T15:35:32-04:00",
+          "tree_id": "582d2e1ea74aa0f044991b05837ebf95f32d94b3",
+          "url": "https://github.com/live-image-tracking-tools/geff/commit/f2bad2252c408fa66f95d6f837ec014d38410490"
+        },
+        "date": 1747856417216,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_write",
+            "value": 0.13052457402137832,
+            "unit": "iter/sec",
+            "range": "stddev: 0.04778223859528065",
+            "extra": "mean: 7.661392557666669 sec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_validate",
+            "value": 37.596522020928774,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0006522501753038362",
+            "extra": "mean: 26.598205000008573 msec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_read",
+            "value": 0.061712705199432186,
+            "unit": "iter/sec",
+            "range": "stddev: 0.5186527806230805",
+            "extra": "mean: 16.204118694333317 sec\nrounds: 3"
           }
         ]
       }
