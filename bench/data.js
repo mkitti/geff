@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1746589840151,
+  "lastUpdate": 1747856291412,
   "repoUrl": "https://github.com/live-image-tracking-tools/geff",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -405,6 +405,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.380610788976034",
             "extra": "mean: 16.049958542666662 sec\nrounds: 3"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "msschwartz21@gmail.com",
+            "name": "Morgan Schwartz",
+            "username": "msschwartz21"
+          },
+          "committer": {
+            "email": "msschwartz21@gmail.com",
+            "name": "Morgan Schwartz",
+            "username": "msschwartz21"
+          },
+          "distinct": true,
+          "id": "f2bad2252c408fa66f95d6f837ec014d38410490",
+          "message": "Remove env variable from github action so that deploy works correctly",
+          "timestamp": "2025-05-21T15:35:32-04:00",
+          "tree_id": "582d2e1ea74aa0f044991b05837ebf95f32d94b3",
+          "url": "https://github.com/live-image-tracking-tools/geff/commit/f2bad2252c408fa66f95d6f837ec014d38410490"
+        },
+        "date": 1747856290971,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_write",
+            "value": 0.1309941814769118,
+            "unit": "iter/sec",
+            "range": "stddev: 0.030928851143142505",
+            "extra": "mean: 7.6339268563333365 sec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_validate",
+            "value": 40.39732547084576,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0005569420386673272",
+            "extra": "mean: 24.754113999989613 msec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_read",
+            "value": 0.06190503046588155,
+            "unit": "iter/sec",
+            "range": "stddev: 0.4343135261786798",
+            "extra": "mean: 16.153776074000024 sec\nrounds: 3"
           }
         ]
       }
