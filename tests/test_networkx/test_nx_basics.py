@@ -38,7 +38,7 @@ def test_read_write_consistency(tmp_path, node_dtype, node_attr_dtypes, edge_att
         dtype=node_attr_dtypes["position"],
     )
     for node, pos in zip(nodes, positions):
-        graph.add_node(node.item(), position=pos.tolist())
+        graph.add_node(node.item(), pos=pos.tolist())
 
     edges = np.array(
         [
@@ -56,14 +56,14 @@ def test_read_write_consistency(tmp_path, node_dtype, node_attr_dtypes, edge_att
 
     path = tmp_path / "rw_consistency.zarr/graph"
 
-    geff_nx.write(graph, "position", path, axis_names=axis_names, axis_units=axis_units)
+    geff_nx.write(graph, "pos", path, axis_names=axis_names, axis_units=axis_units)
 
     compare = geff_nx.read(path)
 
     assert set(graph.nodes) == set(compare.nodes)
     assert set(graph.edges) == set(compare.edges)
     for node in nodes:
-        assert graph.nodes[node.item()]["position"] == compare.nodes[node.item()]["position"]
+        assert graph.nodes[node.item()]["pos"] == compare.nodes[node.item()]["pos"]
 
     for edge in edges:
         assert graph.edges[edge.tolist()]["score"] == compare.edges[edge.tolist()]["score"]
