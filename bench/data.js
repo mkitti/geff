@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1749482749857,
+  "lastUpdate": 1749741119627,
   "repoUrl": "https://github.com/live-image-tracking-tools/geff",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -585,6 +585,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.6580076909468524",
             "extra": "mean: 15.873495299999982 sec\nrounds: 3"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "malinmayorc@janelia.hhmi.org",
+            "name": "Caroline Malin-Mayor",
+            "username": "cmalinmayor"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "fef5c6c96a9c84804956510038bb951e82d49ced",
+          "message": "Merge pull request #54 from live-image-tracking-tools/bugfix-pos-attr\n\nBugfix - restore original position attribute name when loading",
+          "timestamp": "2025-06-12T11:09:50-04:00",
+          "tree_id": "d7323c19277ccd0c56c00a9e1fd0835846ad953b",
+          "url": "https://github.com/live-image-tracking-tools/geff/commit/fef5c6c96a9c84804956510038bb951e82d49ced"
+        },
+        "date": 1749741118610,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_write",
+            "value": 0.1345107373948937,
+            "unit": "iter/sec",
+            "range": "stddev: 0.02785696663958436",
+            "extra": "mean: 7.434350739333335 sec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_validate",
+            "value": 40.021087377749524,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0004623612121523159",
+            "extra": "mean: 24.9868273333315 msec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_read",
+            "value": 0.06305431482978914,
+            "unit": "iter/sec",
+            "range": "stddev: 0.4011755509680916",
+            "extra": "mean: 15.859342896666666 sec\nrounds: 3"
           }
         ]
       }
