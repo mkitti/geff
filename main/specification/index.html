@@ -274,6 +274,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#zarr-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zarr specification
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#geff-metadata" class="md-nav__link">
     <span class="md-ellipsis">
       Geff metadata
@@ -666,6 +675,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#zarr-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zarr specification
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#geff-metadata" class="md-nav__link">
     <span class="md-ellipsis">
       Geff metadata
@@ -767,6 +785,8 @@
 
 <h1 id="geff-specification">Geff specification</h1>
 <p>The graph exchange file format is <code>zarr</code> based. A graph is stored in a zarr group, which can have any name. This allows storing multiple <code>geff</code> graphs inside the same zarr root directory. A <code>geff</code> group is identified by the presence of a <code>geff_version</code> attribute in the <code>.zattrs</code>. Other <code>geff</code> metadata is also stored in the <code>.zattrs</code> file of the <code>geff</code> group. The <code>geff</code> group must contain a <code>nodes</code> group and an <code>edges</code> group.</p>
+<h2 id="zarr-specification">Zarr specification</h2>
+<p>Currently, <code>geff</code> supports zarr specifications <a href="https://zarr-specs.readthedocs.io/en/latest/v2/v2.0.html">2</a> and <a href="https://zarr-specs.readthedocs.io/en/latest/v3/core/index.html">3</a>. However, <code>geff</code> will default to writing specification 2 because graphs written to the zarr v3 spec will not be compatible with all applications. When zarr 3 is more fully adopted by other libraries and tools, we will move to a zarr spec 3 default.</p>
 <h2 id="geff-metadata">Geff metadata</h2>
 <!DOCTYPE html>
 <html lang="en">
@@ -1325,7 +1345,7 @@
 </div>
 
     <footer>
-        <p class="generated-by-footer">Generated using <a href="https://github.com/coveooss/json-schema-for-humans">json-schema-for-humans</a> on 2025-06-12 at 15:12:29 +0000</p>
+        <p class="generated-by-footer">Generated using <a href="https://github.com/coveooss/json-schema-for-humans">json-schema-for-humans</a> on 2025-06-23 at 13:42:33 +0000</p>
     </footer></body>
 </html>
 
