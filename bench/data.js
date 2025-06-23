@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1749823202102,
+  "lastUpdate": 1750686285259,
   "repoUrl": "https://github.com/live-image-tracking-tools/geff",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -675,6 +675,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.6581938351653169",
             "extra": "mean: 16.105233485333333 sec\nrounds: 3"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "msschwartz21@gmail.com",
+            "name": "Morgan Schwartz",
+            "username": "msschwartz21"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "5af31f9b558556b3fc37f7db0c006fc798032437",
+          "message": "Default to zarr format 2 even when using zarr python 3 (#58)\n\n* Add pixi environments for testing zarr 2 and 3 separately\n\n* Default to using zarr_format 2 even when using zarr python 3\n\n* Remove zarr2/zarr3 features/environments because they immediately broke with a numcodecs dependency conflict\n\n* Add a note to the specification about preference for zarr 2 vs zarr 3\n\n* Add comment to docs",
+          "timestamp": "2025-06-23T09:42:07-04:00",
+          "tree_id": "a336acb050350ed5c3dc06ebdceed16c8940634e",
+          "url": "https://github.com/live-image-tracking-tools/geff/commit/5af31f9b558556b3fc37f7db0c006fc798032437"
+        },
+        "date": 1750686284635,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_write",
+            "value": 0.1342187526234033,
+            "unit": "iter/sec",
+            "range": "stddev: 0.03448514123154347",
+            "extra": "mean: 7.450523719333337 sec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_validate",
+            "value": 22.520479617450302,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0016183079372606233",
+            "extra": "mean: 44.40402766667262 msec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_read",
+            "value": 0.06291093111152098,
+            "unit": "iter/sec",
+            "range": "stddev: 0.5289917902718193",
+            "extra": "mean: 15.895488785999996 sec\nrounds: 3"
           }
         ]
       }
