@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1750772403411,
+  "lastUpdate": 1750783518398,
   "repoUrl": "https://github.com/live-image-tracking-tools/geff",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -765,6 +765,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.49239333045650685",
             "extra": "mean: 15.884246996666661 sec\nrounds: 3"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "msschwartz21@gmail.com",
+            "name": "Morgan Schwartz",
+            "username": "msschwartz21"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "cd03d27fa5b2fc33cc943a48bb7e977702b03a7c",
+          "message": "Make position an optional attribute (#60)\n\n* Update metadata schema to make position_attr optional\n\n- Only validate other spatial metadata fields if position_attr is present\n- position_attr is required if other spatial metadata is provided\n\n* Update networkx implementation to make position an optional attribute\n\n* Add comment question about something that may need to be changed\n\n* Update schema\n\n* Remove code that changed the name of the position attribute on the graph\n\n* Add changes about optional position to spec md file\n\n* Fix imports in tests",
+          "timestamp": "2025-06-24T12:43:09-04:00",
+          "tree_id": "e85aa5a6aea76c57b11b4ee43d146e59f23b7d2a",
+          "url": "https://github.com/live-image-tracking-tools/geff/commit/cd03d27fa5b2fc33cc943a48bb7e977702b03a7c"
+        },
+        "date": 1750783517328,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_write",
+            "value": 0.1342715971878896,
+            "unit": "iter/sec",
+            "range": "stddev: 0.04950272409824297",
+            "extra": "mean: 7.447591455999998 sec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_validate",
+            "value": 23.184430708860926,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0007819271399108415",
+            "extra": "mean: 43.13239399998755 msec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_read",
+            "value": 0.06184292619249766,
+            "unit": "iter/sec",
+            "range": "stddev: 0.591044780483727",
+            "extra": "mean: 16.16999811566667 sec\nrounds: 3"
           }
         ]
       }
