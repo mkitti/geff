@@ -693,6 +693,7 @@
 
 <h1 id="geff-specification">Geff specification</h1>
 <p>The graph exchange file format is <code>zarr</code> based. A graph is stored in a zarr group, which can have any name. This allows storing multiple <code>geff</code> graphs inside the same zarr root directory. A <code>geff</code> group is identified by the presence of a <code>geff_version</code> attribute in the <code>.zattrs</code>. Other <code>geff</code> metadata is also stored in the <code>.zattrs</code> file of the <code>geff</code> group. The <code>geff</code> group must contain a <code>nodes</code> group and an <code>edges</code> group.</p>
+<p><code>geff</code> graphs have the option to provide position as a special attribute. In this case, a <code>position_attr</code> must be specified in the <code>geff</code> metadata along with a <code>roi_min</code> and <code>roi_max</code>. If a <code>position_attr</code> is provided, every node must have a position value.</p>
 <h2 id="zarr-specification">Zarr specification</h2>
 <p>Currently, <code>geff</code> supports zarr specifications <a href="https://zarr-specs.readthedocs.io/en/latest/v2/v2.0.html">2</a> and <a href="https://zarr-specs.readthedocs.io/en/latest/v3/core/index.html">3</a>. However, <code>geff</code> will default to writing specification 2 because graphs written to the zarr v3 spec will not be compatible with all applications. When zarr 3 is more fully adopted by other libraries and tools, we will move to a zarr spec 3 default.</p>
 <h2 id="geff-metadata">Geff metadata</h2>
@@ -793,7 +794,7 @@
         <div class="card-header" id="headingroi_min">
             <h2 class="mb-0">
                 <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#roi_min"
-                        aria-expanded="" aria-controls="roi_min" onclick="setAnchor('#roi_min')"><span class="property-name">roi_min</span> <span class="badge badge-warning required-property">Required</span></button>
+                        aria-expanded="" aria-controls="roi_min" onclick="setAnchor('#roi_min')"><span class="property-name">roi_min</span></button>
             </h2>
         </div>
 
@@ -809,16 +810,22 @@
                 d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
             />
         </svg>
-    <a href="#roi_min" onclick="anchorLink('roi_min')">roi_min</a></div><h4>Roi Min</h4><span class="badge badge-dark value-type">Type: array of number</span><br/>
-
-
-
-
-
-
-         <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4>
-    <div class="card">
-        <div class="card-body items-definition" id="roi_min_items">
+    <a href="#roi_min" onclick="anchorLink('roi_min')">roi_min</a></div><h4>Roi Min</h4> <span class="badge badge-success default-value">Default: null</span><br/>
+<div class="any-of-value" id="roi_min_anyOf"><h2 class="handle">
+  <label>Any of</label>
+</h2><ul class="nav nav-tabs" id="tabsroi_min_anyOf_anyOf" role="tablist"><li class="nav-item">
+            <a class="nav-link active anyOf-option"
+               id="roi_min_anyOf_i0" data-toggle="tab" href="#tab-pane_roi_min_anyOf_i0" role="tab"
+               onclick="setAnchor('#roi_min_anyOf_i0')"
+            >Option 1</a>
+        </li><li class="nav-item">
+            <a class="nav-link anyOf-option"
+               id="roi_min_anyOf_i1" data-toggle="tab" href="#tab-pane_roi_min_anyOf_i1" role="tab"
+               onclick="setAnchor('#roi_min_anyOf_i1')"
+            >Option 2</a>
+        </li></ul>
+<div class="tab-content card"><div class="tab-pane fade card-body active show"
+             id="tab-pane_roi_min_anyOf_i0" role="tabpanel">
 
 
     <div class="breadcrumbs">root
@@ -835,7 +842,54 @@
                 d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
             />
         </svg>
-    <a href="#roi_min_items" onclick="anchorLink('roi_min_items')">roi_min items</a></div><span class="badge badge-dark value-type">Type: number</span><br/>
+    <a href="#roi_min_anyOf" onclick="anchorLink('roi_min_anyOf')">anyOf</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_min_anyOf_i0" onclick="anchorLink('roi_min_anyOf_i0')">item 0</a></div><span class="badge badge-dark value-type">Type: array of number</span><br/>
+
+
+
+
+
+
+         <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4>
+    <div class="card">
+        <div class="card-body items-definition" id="roi_min_anyOf_i0_items">
+
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_min" onclick="anchorLink('roi_min')">roi_min</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_min_anyOf" onclick="anchorLink('roi_min_anyOf')">anyOf</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_min_anyOf_i0" onclick="anchorLink('roi_min_anyOf_i0')">item 0</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_min_anyOf_i0_items" onclick="anchorLink('roi_min_anyOf_i0_items')">item 0 items</a></div><span class="badge badge-dark value-type">Type: number</span><br/>
 
 
 
@@ -845,6 +899,46 @@
 
         </div>
     </div>
+        </div><div class="tab-pane fade card-body "
+             id="tab-pane_roi_min_anyOf_i1" role="tabpanel">
+
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_min" onclick="anchorLink('roi_min')">roi_min</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_min_anyOf" onclick="anchorLink('roi_min_anyOf')">anyOf</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_min_anyOf_i1" onclick="anchorLink('roi_min_anyOf_i1')">item 1</a></div><span class="badge badge-dark value-type">Type: null</span><br/>
+
+
+
+
+
+
+
+        </div></div></div>
+
+
+
+
+
+
             </div>
         </div>
     </div>
@@ -854,7 +948,7 @@
         <div class="card-header" id="headingroi_max">
             <h2 class="mb-0">
                 <button class="btn btn-link property-name-button" type="button" data-toggle="collapse" data-target="#roi_max"
-                        aria-expanded="" aria-controls="roi_max" onclick="setAnchor('#roi_max')"><span class="property-name">roi_max</span> <span class="badge badge-warning required-property">Required</span></button>
+                        aria-expanded="" aria-controls="roi_max" onclick="setAnchor('#roi_max')"><span class="property-name">roi_max</span></button>
             </h2>
         </div>
 
@@ -870,16 +964,22 @@
                 d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
             />
         </svg>
-    <a href="#roi_max" onclick="anchorLink('roi_max')">roi_max</a></div><h4>Roi Max</h4><span class="badge badge-dark value-type">Type: array of number</span><br/>
-
-
-
-
-
-
-         <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4>
-    <div class="card">
-        <div class="card-body items-definition" id="roi_max_items">
+    <a href="#roi_max" onclick="anchorLink('roi_max')">roi_max</a></div><h4>Roi Max</h4> <span class="badge badge-success default-value">Default: null</span><br/>
+<div class="any-of-value" id="roi_max_anyOf"><h2 class="handle">
+  <label>Any of</label>
+</h2><ul class="nav nav-tabs" id="tabsroi_max_anyOf_anyOf" role="tablist"><li class="nav-item">
+            <a class="nav-link active anyOf-option"
+               id="roi_max_anyOf_i0" data-toggle="tab" href="#tab-pane_roi_max_anyOf_i0" role="tab"
+               onclick="setAnchor('#roi_max_anyOf_i0')"
+            >Option 1</a>
+        </li><li class="nav-item">
+            <a class="nav-link anyOf-option"
+               id="roi_max_anyOf_i1" data-toggle="tab" href="#tab-pane_roi_max_anyOf_i1" role="tab"
+               onclick="setAnchor('#roi_max_anyOf_i1')"
+            >Option 2</a>
+        </li></ul>
+<div class="tab-content card"><div class="tab-pane fade card-body active show"
+             id="tab-pane_roi_max_anyOf_i0" role="tabpanel">
 
 
     <div class="breadcrumbs">root
@@ -896,7 +996,54 @@
                 d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
             />
         </svg>
-    <a href="#roi_max_items" onclick="anchorLink('roi_max_items')">roi_max items</a></div><span class="badge badge-dark value-type">Type: number</span><br/>
+    <a href="#roi_max_anyOf" onclick="anchorLink('roi_max_anyOf')">anyOf</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_max_anyOf_i0" onclick="anchorLink('roi_max_anyOf_i0')">item 0</a></div><span class="badge badge-dark value-type">Type: array of number</span><br/>
+
+
+
+
+
+
+         <span class="badge badge-info no-additional">No Additional Items</span><h4>Each item of this array must be:</h4>
+    <div class="card">
+        <div class="card-body items-definition" id="roi_max_anyOf_i0_items">
+
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_max" onclick="anchorLink('roi_max')">roi_max</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_max_anyOf" onclick="anchorLink('roi_max_anyOf')">anyOf</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_max_anyOf_i0" onclick="anchorLink('roi_max_anyOf_i0')">item 0</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_max_anyOf_i0_items" onclick="anchorLink('roi_max_anyOf_i0_items')">item 0 items</a></div><span class="badge badge-dark value-type">Type: number</span><br/>
 
 
 
@@ -906,6 +1053,46 @@
 
         </div>
     </div>
+        </div><div class="tab-pane fade card-body "
+             id="tab-pane_roi_max_anyOf_i1" role="tabpanel">
+
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_max" onclick="anchorLink('roi_max')">roi_max</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_max_anyOf" onclick="anchorLink('roi_max_anyOf')">anyOf</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#roi_max_anyOf_i1" onclick="anchorLink('roi_max_anyOf_i1')">item 1</a></div><span class="badge badge-dark value-type">Type: null</span><br/>
+
+
+
+
+
+
+
+        </div></div></div>
+
+
+
+
+
+
             </div>
         </div>
     </div>
@@ -931,8 +1118,87 @@
                 d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
             />
         </svg>
-    <a href="#position_attr" onclick="anchorLink('position_attr')">position_attr</a></div><h4>Position Attr</h4><span class="badge badge-dark value-type">Type: string</span> <span class="badge badge-success default-value">Default: "position"</span><br/>
+    <a href="#position_attr" onclick="anchorLink('position_attr')">position_attr</a></div><h4>Position Attr</h4> <span class="badge badge-success default-value">Default: null</span><br/>
+<div class="any-of-value" id="position_attr_anyOf"><h2 class="handle">
+  <label>Any of</label>
+</h2><ul class="nav nav-tabs" id="tabsposition_attr_anyOf_anyOf" role="tablist"><li class="nav-item">
+            <a class="nav-link active anyOf-option"
+               id="position_attr_anyOf_i0" data-toggle="tab" href="#tab-pane_position_attr_anyOf_i0" role="tab"
+               onclick="setAnchor('#position_attr_anyOf_i0')"
+            >Option 1</a>
+        </li><li class="nav-item">
+            <a class="nav-link anyOf-option"
+               id="position_attr_anyOf_i1" data-toggle="tab" href="#tab-pane_position_attr_anyOf_i1" role="tab"
+               onclick="setAnchor('#position_attr_anyOf_i1')"
+            >Option 2</a>
+        </li></ul>
+<div class="tab-content card"><div class="tab-pane fade card-body active show"
+             id="tab-pane_position_attr_anyOf_i0" role="tabpanel">
 
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#position_attr" onclick="anchorLink('position_attr')">position_attr</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#position_attr_anyOf" onclick="anchorLink('position_attr_anyOf')">anyOf</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#position_attr_anyOf_i0" onclick="anchorLink('position_attr_anyOf_i0')">item 0</a></div><span class="badge badge-dark value-type">Type: string</span><br/>
+
+
+
+
+
+
+
+        </div><div class="tab-pane fade card-body "
+             id="tab-pane_position_attr_anyOf_i1" role="tabpanel">
+
+
+    <div class="breadcrumbs">root
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#position_attr" onclick="anchorLink('position_attr')">position_attr</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#position_attr_anyOf" onclick="anchorLink('position_attr_anyOf')">anyOf</a>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+            />
+        </svg>
+    <a href="#position_attr_anyOf_i1" onclick="anchorLink('position_attr_anyOf_i1')">item 1</a></div><span class="badge badge-dark value-type">Type: null</span><br/>
+
+
+
+
+
+
+
+        </div></div></div>
 
 
 
@@ -1253,7 +1519,7 @@
 </div>
 
     <footer>
-        <p class="generated-by-footer">Generated using <a href="https://github.com/coveooss/json-schema-for-humans">json-schema-for-humans</a> on 2025-06-24 at 13:40:41 +0000</p>
+        <p class="generated-by-footer">Generated using <a href="https://github.com/coveooss/json-schema-for-humans">json-schema-for-humans</a> on 2025-06-24 at 16:45:45 +0000</p>
     </footer></body>
 </html>
 
@@ -1272,7 +1538,7 @@
 <p>When writing a graph with missing attributes to the geff format, you must fill in a dummy value in the <code>values</code> array for the nodes that are missing the attribute, in order to keep the indices aligned with the node ids.</p>
 </div>
 <ul>
-<li>The <code>position</code> group is a special node attribute group that must be present and does not allow missing attributes.</li>
+<li>The <code>position</code> group is a special node attribute group that must be present if a <code>position_attr</code> is set in the <code>geff</code> metadata and does not allow missing attributes.</li>
 <li>The <code>seg_id</code> group is an optional, special node attribute group that stores the segmenatation label for each node. The <code>seg_id</code> values do not need to be unique, in case labels are repeated between time points. If the <code>seg_id</code> group is not present, it is assumed that the graph is not associated with a segmentation. </li>
 </ul>
 <!-- Perhaps we just let the user specify the seg id attribute in the metadata instead? Then you can point it to the node ids if you wanted to -->
