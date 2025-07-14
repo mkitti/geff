@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1752521766833,
+  "lastUpdate": 1752521965263,
   "repoUrl": "https://github.com/live-image-tracking-tools/geff",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -990,6 +990,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.5047312216557547",
             "extra": "mean: 16.07261378133334 sec\nrounds: 3"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "msschwartz21@gmail.com",
+            "name": "Morgan Schwartz",
+            "username": "msschwartz21"
+          },
+          "committer": {
+            "email": "msschwartz21@gmail.com",
+            "name": "Morgan Schwartz",
+            "username": "msschwartz21"
+          },
+          "distinct": true,
+          "id": "c6e4d9fde4a8176c532d93b6af7c1d86809158cf",
+          "message": "Update json schema with new supported version",
+          "timestamp": "2025-07-14T15:33:26-04:00",
+          "tree_id": "0cf28ee199b4b16ee5426035e70ec1ed0260481e",
+          "url": "https://github.com/live-image-tracking-tools/geff/commit/c6e4d9fde4a8176c532d93b6af7c1d86809158cf"
+        },
+        "date": 1752521964061,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_write",
+            "value": 0.13472583441501257,
+            "unit": "iter/sec",
+            "range": "stddev: 0.03824246995590367",
+            "extra": "mean: 7.422481399666651 sec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_validate",
+            "value": 23.47235553109413,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0004603431055505911",
+            "extra": "mean: 42.60330833329817 msec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_read",
+            "value": 0.0626976993993589,
+            "unit": "iter/sec",
+            "range": "stddev: 0.5062633080856318",
+            "extra": "mean: 15.949548541333323 sec\nrounds: 3"
           }
         ]
       }
