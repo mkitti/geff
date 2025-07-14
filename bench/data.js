@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1750783518398,
+  "lastUpdate": 1752515136143,
   "repoUrl": "https://github.com/live-image-tracking-tools/geff",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -810,6 +810,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.591044780483727",
             "extra": "mean: 16.16999811566667 sec\nrounds: 3"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "msschwartz21@gmail.com",
+            "name": "Morgan Schwartz",
+            "username": "msschwartz21"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "07b8e0069606d50e474d1678af88afc6b85e989d",
+          "message": "Docs improvements (#62)\n\n* Switch docs over to manual specification of which things to show in api docs\n\n* Add todo note about header level\n\n* Decide that heading 3 is fine for functions\n\n* Add explicit nav order\n\n* Update docs to work with new import paths\n\n* Add example metadata to spec page\n\n* Fix formatting on what is geff page\n\n* Point to docs in the readme\n\n* Nitpicks from Caroline on docs\n\n* Add ruff check for docstrings\n\n---------\n\nCo-authored-by: Caroline Malin-Mayor <malinmayorc@janelia.hhmi.org>",
+          "timestamp": "2025-07-14T13:43:32-04:00",
+          "tree_id": "613990131a081675f1d9ba0da270fcc0747d9618",
+          "url": "https://github.com/live-image-tracking-tools/geff/commit/07b8e0069606d50e474d1678af88afc6b85e989d"
+        },
+        "date": 1752515135089,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_write",
+            "value": 0.1350205222349956,
+            "unit": "iter/sec",
+            "range": "stddev: 0.03735901895165445",
+            "extra": "mean: 7.4062815299999825 sec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_validate",
+            "value": 23.242673014619065,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0009464095293066775",
+            "extra": "mean: 43.02431133334039 msec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_read",
+            "value": 0.06253154624273917,
+            "unit": "iter/sec",
+            "range": "stddev: 0.5566116872977945",
+            "extra": "mean: 15.991928235999998 sec\nrounds: 3"
           }
         ]
       }
