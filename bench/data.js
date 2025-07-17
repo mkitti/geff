@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1752521965263,
+  "lastUpdate": 1752764214240,
   "repoUrl": "https://github.com/live-image-tracking-tools/geff",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -1035,6 +1035,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.5062633080856318",
             "extra": "mean: 15.949548541333323 sec\nrounds: 3"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "talley.lambert@gmail.com",
+            "name": "Talley Lambert",
+            "username": "tlambert03"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "85a32e46463e695330b20601a51a1366eb2c77d3",
+          "message": "fix: fix zarr usage in test (#79)",
+          "timestamp": "2025-07-17T10:54:35-04:00",
+          "tree_id": "416780a25b4ef4a51450719e9940a97835b07b6c",
+          "url": "https://github.com/live-image-tracking-tools/geff/commit/85a32e46463e695330b20601a51a1366eb2c77d3"
+        },
+        "date": 1752764213511,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_write",
+            "value": 0.11410515538758542,
+            "unit": "iter/sec",
+            "range": "stddev: 0.09462164148328087",
+            "extra": "mean: 8.763845915666659 sec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_validate",
+            "value": 23.374114514524194,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0012826337853296095",
+            "extra": "mean: 42.78236933333327 msec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_read",
+            "value": 0.05193797834376855,
+            "unit": "iter/sec",
+            "range": "stddev: 0.44821304575036697",
+            "extra": "mean: 19.25373362399999 sec\nrounds: 3"
           }
         ]
       }
