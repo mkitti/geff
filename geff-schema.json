@@ -52,35 +52,75 @@
       "default": null,
       "title": "Position Attr"
     },
-    "axis_names": {
-      "anyOf": [
-        {
-          "items": {
+    "axes": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 2,
+      "maxItems": 5,
+      "contains": {
+        "type": "object",
+        "properties": {
+          "name": {
             "type": "string"
           },
-          "type": "array"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "Axis Names"
-    },
-    "axis_units": {
-      "anyOf": [
-        {
-          "items": {
-            "type": "string"
+          "type": {
+            "type": "string",
+            "enum": [
+              "space"
+            ]
           },
-          "type": "array"
-        },
-        {
-          "type": "null"
+          "unit": {
+            "type": "string"
+          }
         }
-      ],
-      "default": null,
-      "title": "Axis Units"
+      },
+      "minContains": 2,
+      "maxContains": 3,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "channel",
+                  "time",
+                  "space"
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "type"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "not": {
+                  "enum": [
+                    "space",
+                    "time",
+                    "channel"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "name"
+            ]
+          }
+        ]
+      }
     }
   },
   "required": [
