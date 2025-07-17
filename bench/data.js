@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1752764214240,
+  "lastUpdate": 1752765723382,
   "repoUrl": "https://github.com/live-image-tracking-tools/geff",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -1080,6 +1080,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.44821304575036697",
             "extra": "mean: 19.25373362399999 sec\nrounds: 3"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "bgallusser@chanzuckerberg.com",
+            "name": "Benjamin Gallusser",
+            "username": "bentaculum"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "229435acd97451ae20994a4196666e57cd03db3f",
+          "message": "Constrain pydantic to version 2 or higher (#84)\n\n# Types of Changes\n- Maintenance (e.g. dependencies, CI, releases, etc.)\n\n# Checklist\n- [x] I have read the developer/contributing docs.",
+          "timestamp": "2025-07-17T11:19:19-04:00",
+          "tree_id": "837ab8e33b6bcf99bdb7c654e651958e5bb0cce3",
+          "url": "https://github.com/live-image-tracking-tools/geff/commit/229435acd97451ae20994a4196666e57cd03db3f"
+        },
+        "date": 1752765722592,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_write",
+            "value": 0.13459249697664036,
+            "unit": "iter/sec",
+            "range": "stddev: 0.015091190036101829",
+            "extra": "mean: 7.429834667333338 sec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_validate",
+            "value": 23.078239779264326,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000515876546779518",
+            "extra": "mean: 43.330861000001164 msec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_read",
+            "value": 0.06266314144043875,
+            "unit": "iter/sec",
+            "range": "stddev: 0.5022254919808535",
+            "extra": "mean: 15.958344523 sec\nrounds: 3"
           }
         ]
       }
