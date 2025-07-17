@@ -1,3 +1,4 @@
+#!/usr/bin/env -S pixi run python
 import argparse
 import json
 
