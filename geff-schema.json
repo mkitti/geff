@@ -54,9 +54,9 @@
     },
     "axes": {
       "type": "array",
+      "title": "Axes",
       "uniqueItems": true,
-      "minItems": 2,
-      "maxItems": 5,
+      "minItems": 1,
       "contains": {
         "type": "object",
         "properties": {
