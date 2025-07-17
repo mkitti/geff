@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1752765723382,
+  "lastUpdate": 1752775877400,
   "repoUrl": "https://github.com/live-image-tracking-tools/geff",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -1125,6 +1125,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.5022254919808535",
             "extra": "mean: 15.958344523 sec\nrounds: 3"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "45037215+TeunHuijben@users.noreply.github.com",
+            "name": "Teun Huijben",
+            "username": "TeunHuijben"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "f102322b739e8989d0289889de992e2c2dd0cf07",
+          "message": "Elaborated error message when provided path that doesn't have .zattrs (#95)\n\n# Proposed Change\n- Added  error message when the provided path doesn't have .zattrs\n- Made a little fix in `utils` due to pre-commit",
+          "timestamp": "2025-07-17T14:09:09-04:00",
+          "tree_id": "af554e07791db74a3de9f11a77fb480bc6cdb53b",
+          "url": "https://github.com/live-image-tracking-tools/geff/commit/f102322b739e8989d0289889de992e2c2dd0cf07"
+        },
+        "date": 1752775876230,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_write",
+            "value": 0.13707957027818363,
+            "unit": "iter/sec",
+            "range": "stddev: 0.015631569188810146",
+            "extra": "mean: 7.295033081666664 sec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_validate",
+            "value": 23.016469964450714,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00037115725092269007",
+            "extra": "mean: 43.44714900002108 msec\nrounds: 3"
+          },
+          {
+            "name": "tests/bench.py::test_read",
+            "value": 0.06351632223060326,
+            "unit": "iter/sec",
+            "range": "stddev: 0.5084517781962051",
+            "extra": "mean: 15.743984614999997 sec\nrounds: 3"
           }
         ]
       }
