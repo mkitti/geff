@@ -35,18 +35,18 @@ class GeffMetadata(BaseModel):
     directed: bool
     roi_min: tuple[float, ...] | None = None
     roi_max: tuple[float, ...] | None = None
-    position_attr: str | None = None
+    position_prop: str | None = None
     axis_names: tuple[str, ...] | None = None
     axis_units: tuple[str, ...] | None = None
 
     @model_validator(mode="after")
     def _validate_model(self) -> GeffMetadata:
         # Check spatial metadata only if position is provided
-        if self.position_attr is not None:
+        if self.position_prop is not None:
             # Check that rois are there if position provided
             if self.roi_min is None or self.roi_max is None:
                 raise ValueError(
-                    f"Position attribute {self.position_attr} has been specified, "
+                    f"Position property {self.position_prop} has been specified, "
                     "but roi_min and/or roi_max are not specified."
                 )
 
@@ -76,7 +76,7 @@ class GeffMetadata(BaseModel):
         elif any([self.roi_min, self.roi_max, self.axis_names, self.axis_units]):
             raise ValueError(
                 "Spatial metadata (roi_min, roi_max, axis_names or axis_units) provided without"
-                " position_attr"
+                " position_prop"
             )
         return self
 
@@ -88,8 +88,8 @@ class GeffMetadata(BaseModel):
         """
         if isinstance(group, Path):
             group = zarr.open(group)
-        for key, value in self:
-            group.attrs[key] = value
+
+        group.attrs["geff"] = self.model_dump(mode="json")
 
     @classmethod
     def read(cls, group: zarr.Group | Path) -> GeffMetadata:
@@ -105,14 +105,18 @@ class GeffMetadata(BaseModel):
             group = zarr.open(group)
 
         # Check if geff_version exists in zattrs
-        if "geff_version" not in group.attrs:
+        if "geff" not in group.attrs:
             raise ValueError(
-                f"No geff_version found in {group}. This may indicate the path is incorrect or "
+                f"No geff key found in {group}. This may indicate the path is incorrect or "
                 f"zarr group name is not specified (e.g. /dataset.zarr/tracks/ instead of "
                 f"/dataset.zarr/)."
             )
 
-        return cls(**group.attrs)
+        return cls(**group.attrs["geff"])
+
+
+class GeffSchema(BaseModel):
+    geff: GeffMetadata = Field(..., description="geff_metadata")
 
 
 def write_metadata_schema(outpath: Path):
@@ -121,6 +125,6 @@ def write_metadata_schema(outpath: Path):
     Args:
         outpath (Path): The file to write the schema to
     """
-    metadata_schema = GeffMetadata.model_json_schema()
+    metadata_schema = GeffSchema.model_json_schema()
     with open(outpath, "w") as f:
         f.write(json.dumps(metadata_schema, indent=2))
