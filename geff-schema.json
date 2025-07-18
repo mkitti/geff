@@ -40,7 +40,7 @@
       "default": null,
       "title": "Roi Max"
     },
-    "position_attr": {
+    "position_prop": {
       "anyOf": [
         {
           "type": "string"
@@ -50,7 +50,7 @@
         }
       ],
       "default": null,
-      "title": "Position Attr"
+      "title": "Position Prop"
     },
     "axis_names": {
       "anyOf": [
