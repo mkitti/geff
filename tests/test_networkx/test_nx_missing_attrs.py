@@ -94,7 +94,7 @@ def test_sparse_edge_props(tmp_path):
 
 
 def test_missing_pos_prop(tmp_path):
-    zarr_path = Path(tmp_path) / "test.zarr"
+    zarr_path = Path(tmp_path) / "test1.zarr"
     graph, _ = graph_sparse_node_props()
     # wrong property name
     with pytest.raises(UserWarning, match="Property .* is not present on any graph elements"):
