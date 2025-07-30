@@ -122,7 +122,7 @@ This is a geff metadata zattrs file that matches the above example structure.
             {"name": "t", "type": "time", "unit": "seconds", "min": 0, "max": 125},
             {"name": "z", "type": "space", "unit": "micrometers", "min": 1523.36, "max": 4398.1},
             {"name": "y", "type": "space", "unit": "micrometers", "min": 81.667, "max": 1877.7},
-            {"name": "x", "type": "space", "unit": "micrometers", "min": 764.42, "max": 2152.3},
+            {"name": "x", "type": "space", "unit": "micrometers", "min": 764.42, "max": 2152.3}
         ],
         // predefined node attributes for storing detections as spheres or ellipsoids
         "sphere": "radius", // optional
@@ -131,7 +131,7 @@ This is a geff metadata zattrs file that matches the above example structure.
             "display_horizontal": "x",
             "display_vertical": "y",
             "display_depth": "z",
-            "display_time": "t",
+            "display_time": "t"
         },
         // node attributes corresponding to tracklet and/or lineage IDs
         "track_node_props": {
@@ -140,11 +140,11 @@ This is a geff metadata zattrs file that matches the above example structure.
         },
         "related_objects": [
             {
-                "type":"labels", "path":"../segmentation/", "label_prop": "seg_id",
+                "type":"labels", "path":"../segmentation/", "label_prop": "seg_id"
             },
             {
-                "type":"image", "path":"../raw/",
-            },
+                "type":"image", "path":"../raw/"
+            }
         ],
         // optional coordinate transformation is defined as homogeneous coordinates
         // It is expected to be a (D+1)x(D+1) matrix where D is the number of axes
