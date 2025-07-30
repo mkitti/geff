@@ -119,10 +119,10 @@ This is a geff metadata zattrs file that matches the above example structure.
         "geff_version": "0.1.3.dev4+gd5d1132.d20250616",
         // axes are optional
         "axes": [
-            {'name': 't', 'type': "time", 'unit': "seconds", 'min': 0, 'max': 125},
-            {'name': 'z', 'type': "space", 'unit': "micrometers", 'min': 1523.36, 'max': 4398.1},
-            {'name': 'y', 'type': "space", 'unit': "micrometers", 'min': 81.667, 'max': 1877.7},
-            {'name': 'x', 'type': "space", 'unit': "micrometers", 'min': 764.42, 'max': 2152.3},
+            {"name": "t", "type": "time", "unit": "seconds", "min": 0, "max": 125},
+            {"name": "z", "type": "space", "unit": "micrometers", "min": 1523.36, "max": 4398.1},
+            {"name": "y", "type": "space", "unit": "micrometers", "min": 81.667, "max": 1877.7},
+            {"name": "x", "type": "space", "unit": "micrometers", "min": 764.42, "max": 2152.3},
         ],
         // predefined node attributes for storing detections as spheres or ellipsoids
         "sphere": "radius", // optional
@@ -138,14 +138,14 @@ This is a geff metadata zattrs file that matches the above example structure.
             "lineage": "ultrack_lineage_id",
             "tracklet": "ultrack_id"
         },
-        "related_objects": {
+        "related_objects": [
             {
                 "type":"labels", "path":"../segmentation/", "label_prop": "seg_id",
             },
             {
                 "type":"image", "path":"../raw/",
             },
-        },
+        ],
         // optional coordinate transformation is defined as homogeneous coordinates
         // It is expected to be a (D+1)x(D+1) matrix where D is the number of axes
         "affine": [
@@ -156,7 +156,7 @@ This is a geff metadata zattrs file that matches the above example structure.
             [0, 0, 0, 0, 1],
         // custom other things must be placed **inside** the extra attribute
         "extra": {
-            ...
+            // ...
         }
     }
 }
