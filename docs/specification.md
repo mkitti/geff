@@ -153,7 +153,8 @@ This is a geff metadata zattrs file that matches the above example structure.
             [0, 1, 0, 0, 0],
             [0, 0, 1, 0, 0],
             [0, 0, 0, 1, 0],
-            [0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 1]
+        ],
         // custom other things must be placed **inside** the extra attribute
         "extra": {
             // ...
