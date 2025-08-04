@@ -162,3 +162,13 @@ This is a geff metadata zattrs file that matches the above example structure.
     }
 }
 ```
+
+Minimal geff metadata must have `version` and `directed` fields under a `geff` field.
+```jsonc
+{
+    "geff": {
+        "version": "0.0.0",
+        "directed": false
+    }
+}
+```
