@@ -17,9 +17,7 @@ JSONC_SINGLE_LINE_COMMENT_RE = re.compile(r"//.*")
 
 
 def check_jsonc_markdown_blocks(markdown_text, geff=True):
-    """
-    Test if JSON with comment code blocks in markdown validate as geff
-    """
+    """Test if JSON with comment code blocks in markdown validate as geff."""
     jsonc_blocks = JSONC_MD_RE.findall(markdown_text)
     assert jsonc_blocks, "markdown_text does not contain any jsonc blocks"
 
@@ -35,16 +33,12 @@ def check_jsonc_markdown_blocks(markdown_text, geff=True):
 
 
 def test_specification_md():
-    """
-    Test JSONC blocks in docs/specification.md validate as geff
-    """
+    """Test JSONC blocks in docs/specification.md validate as geff."""
     check_jsonc_markdown_blocks(SPECIFICATION_MD_PATH.read_text())
 
 
 def test_check_jsonc_markdown_blocks():
-    """
-    Test JSONC extraction, parsing, and geff validation
-    """
+    """Test JSONC extraction, parsing, and geff validation."""
     # Check minimal valid geff with comments
     check_jsonc_markdown_blocks("""
     # Minimal geff specification
@@ -78,14 +72,17 @@ def test_check_jsonc_markdown_blocks():
         """)
 
     # Check
-    check_jsonc_markdown_blocks("""
+    check_jsonc_markdown_blocks(
+        """
     # OME-NGFF
     ```jsonc
     {
         "ome": {}
     }
     ```
-    """, False)
+    """,
+        False,
+    )
 
     # Check for invalid geff
     with pytest.raises(pydantic.ValidationError):
