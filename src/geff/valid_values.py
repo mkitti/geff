@@ -1,6 +1,7 @@
 import encodings
 import pkgutil
 
+import cf_units
 import numpy as np
 
 # -----------------------------------------------------------------------------
@@ -95,7 +96,7 @@ def validate_space_unit(unit_name: str) -> bool:
         bool: True if a space unit is a KNOWN valid unit.
         False if the unit is not known. The unit may be valid.
     """
-    return unit_name in VALID_SPACE_UNITS
+    return unit_name in VALID_SPACE_UNITS or cf_units.Unit(unit_name).convert(1, "micrometer")
 
 
 def validate_time_unit(unit_name: str) -> bool:
@@ -108,7 +109,7 @@ def validate_time_unit(unit_name: str) -> bool:
         bool: True if a time unit is a KNOWN valid unit.
         False if the unit is not known. The unit may be valid.
     """
-    return unit_name in VALID_TIME_UNITS
+    return unit_name in VALID_TIME_UNITS or cf_units.Unit(unit_name).is_time()
 
 
 # -----------------------------------------------------------------------------
