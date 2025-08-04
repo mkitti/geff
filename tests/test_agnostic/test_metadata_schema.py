@@ -328,12 +328,24 @@ class TestAxis:
 
     def test_invalid_units(self):
         # Spatial
-        with pytest.warns(UserWarning, match=r"Spatial unit .* not in valid"):
+        with pytest.raises(pydantic.ValidationError, match=r"Failed to parse unit \"bad unit\""):
             Axis(name="test", type="space", unit="bad unit")
 
+        with pytest.raises(pydantic.ValidationError, match=r"second is not a valid space unit."):
+            Axis(name="test", type="space", unit="second")
+
+        with pytest.warns(UserWarning, match=r"Spatial unit .* not in valid"):
+            Axis(name="test", type="space", unit="micrometers")
+
         # Temporal
-        with pytest.warns(UserWarning, match=r"Temporal unit .* not in valid"):
+        with pytest.raises(pydantic.ValidationError, match=r"Failed to parse unit \"bad unit\""):
             Axis(name="test", type="time", unit="bad unit")
+        
+        with pytest.raises(pydantic.ValidationError, match=r"micrometer is not a valid time unit."):
+            Axis(name="test", type="time", unit="micrometer")
+
+        with pytest.warns(UserWarning, match=r"Temporal unit .* not in valid"):
+            Axis(name="test", type="time", unit="seconds")
 
         # Don't check units if we don't specify type
         Axis(name="test", unit="not checked")

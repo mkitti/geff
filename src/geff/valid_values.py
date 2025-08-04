@@ -96,7 +96,13 @@ def validate_space_unit(unit_name: str) -> bool:
         bool: True if a space unit is a KNOWN valid unit.
         False if the unit is not known. The unit may be valid.
     """
-    return unit_name in VALID_SPACE_UNITS or cf_units.Unit(unit_name).convert(1, "micrometer")
+    try:
+        return unit_name in VALID_SPACE_UNITS or cf_units.Unit(unit_name).convert(1, "micrometer")
+    except ValueError as err:
+        # Conversion to micrometer should not error
+        if str(err).startswith("Unable to convert"):
+            return False
+        raise
 
 
 def validate_time_unit(unit_name: str) -> bool:
