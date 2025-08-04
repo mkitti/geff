@@ -71,7 +71,7 @@ def test_check_jsonc_markdown_blocks():
         ```
         """)
 
-    # Check
+    # Check JSON only
     check_jsonc_markdown_blocks(
         """
         # OME-NGFF
