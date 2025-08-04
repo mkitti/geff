@@ -74,13 +74,13 @@ def test_check_jsonc_markdown_blocks():
     # Check
     check_jsonc_markdown_blocks(
         """
-    # OME-NGFF
-    ```jsonc
-    {
-        "ome": {}
-    }
-    ```
-    """,
+        # OME-NGFF
+        ```jsonc
+        {
+            "ome": {}
+        }
+        ```
+        """,
         False,
     )
 
