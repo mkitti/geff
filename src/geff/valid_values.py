@@ -1,8 +1,8 @@
 import encodings
 import pkgutil
 
-import cf_units
 import numpy as np
+import pint
 
 # -----------------------------------------------------------------------------
 # Unit validation
@@ -73,6 +73,7 @@ VALID_AXIS_TYPES = [
     "channel",  # TODO: discuss
 ]
 
+ureg = pint.UnitRegistry()
 
 def validate_axis_type(axis_type: str) -> bool:
     """Validate axis type against standard list
@@ -96,13 +97,7 @@ def validate_space_unit(unit_name: str) -> bool:
         bool: True if a space unit is a KNOWN valid unit.
         False if the unit is not known. The unit may be valid.
     """
-    try:
-        return unit_name in VALID_SPACE_UNITS or cf_units.Unit(unit_name).convert(1, "micrometer")
-    except ValueError as err:
-        # Conversion to micrometer should not error
-        if str(err).startswith("Unable to convert"):
-            return False
-        raise
+    return unit_name in VALID_SPACE_UNITS or ureg(unit_name).check("[length]")
 
 
 def validate_time_unit(unit_name: str) -> bool:
@@ -115,7 +110,7 @@ def validate_time_unit(unit_name: str) -> bool:
         bool: True if a time unit is a KNOWN valid unit.
         False if the unit is not known. The unit may be valid.
     """
-    return unit_name in VALID_TIME_UNITS or cf_units.Unit(unit_name).is_time()
+    return unit_name in VALID_TIME_UNITS or ureg(unit_name).check("[time]")
 
 
 # -----------------------------------------------------------------------------

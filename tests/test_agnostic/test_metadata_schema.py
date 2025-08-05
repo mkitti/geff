@@ -7,6 +7,7 @@ import numpy as np
 import pydantic
 import pytest
 import zarr
+from pint.errors import UndefinedUnitError
 
 import geff
 from geff.affine import Affine
@@ -328,8 +329,8 @@ class TestAxis:
 
     def test_invalid_units(self):
         # Spatial
-        with pytest.raises(pydantic.ValidationError, match=r"Failed to parse unit \"bad unit\""):
-            Axis(name="test", type="space", unit="bad unit")
+        with pytest.raises(UndefinedUnitError, match=r"'bad_unit' is not defined in the unit registry"):
+            Axis(name="test", type="space", unit="bad_unit")
 
         with pytest.raises(pydantic.ValidationError, match=r"second is not a valid space unit."):
             Axis(name="test", type="space", unit="second")
@@ -338,9 +339,9 @@ class TestAxis:
             Axis(name="test", type="space", unit="micrometers")
 
         # Temporal
-        with pytest.raises(pydantic.ValidationError, match=r"Failed to parse unit \"bad unit\""):
-            Axis(name="test", type="time", unit="bad unit")
-        
+        with pytest.raises(UndefinedUnitError, match=r"'bad_unit' is not defined in the unit registry"):
+            Axis(name="test", type="time", unit="bad_unit")
+
         with pytest.raises(pydantic.ValidationError, match=r"micrometer is not a valid time unit."):
             Axis(name="test", type="time", unit="micrometer")
 
