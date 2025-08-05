@@ -329,7 +329,9 @@ class TestAxis:
 
     def test_invalid_units(self):
         # Spatial
-        with pytest.raises(UndefinedUnitError, match=r"'bad_unit' is not defined in the unit registry"):
+        with pytest.raises(
+            UndefinedUnitError, match=r"'bad_unit' is not defined in the unit registry"
+        ):
             Axis(name="test", type="space", unit="bad_unit")
 
         with pytest.raises(pydantic.ValidationError, match=r"second is not a valid space unit."):
@@ -339,7 +341,9 @@ class TestAxis:
             Axis(name="test", type="space", unit="micrometers")
 
         # Temporal
-        with pytest.raises(UndefinedUnitError, match=r"'bad_unit' is not defined in the unit registry"):
+        with pytest.raises(
+            UndefinedUnitError, match=r"'bad_unit' is not defined in the unit registry"
+        ):
             Axis(name="test", type="time", unit="bad_unit")
 
         with pytest.raises(pydantic.ValidationError, match=r"micrometer is not a valid time unit."):

@@ -75,6 +75,7 @@ VALID_AXIS_TYPES = [
 
 ureg = pint.UnitRegistry()
 
+
 def validate_axis_type(axis_type: str) -> bool:
     """Validate axis type against standard list
 
