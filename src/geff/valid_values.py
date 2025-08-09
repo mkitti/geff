@@ -96,7 +96,11 @@ def validate_axis_type(axis_type: Any) -> TypeGuard[AxisType]:
 
 
 def validate_space_unit(unit_name: Any) -> TypeGuard[SpaceUnits]:
-    """Checks space unit against ome-zarr supported units
+    """Checks space unit against supported units
+
+    Units are checked against the units for "space" axes enumerated in the
+    OME-NGFF specification and in the pint default unit registry in the
+    [length] units container.
 
     Args:
         unit_name (str): Unit name to check
@@ -109,7 +113,11 @@ def validate_space_unit(unit_name: Any) -> TypeGuard[SpaceUnits]:
 
 
 def validate_time_unit(unit_name: Any) -> TypeGuard[TimeUnits]:
-    """Check time unit against ome-zarr supported units
+    """Check time unit against supported units
+
+    Units are checked again the units for "time" axes enumerated in the
+    OME-NGFF specification and in the pint default unit registry in the
+    [time] units container.
 
     Args:
         unit_name (str): Unit name to check
