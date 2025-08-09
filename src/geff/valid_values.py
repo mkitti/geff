@@ -79,8 +79,9 @@ AxisType: TypeAlias = Literal[
 VALID_SPACE_UNITS: tuple[SpaceUnits, ...] = get_args(SpaceUnits)
 VALID_TIME_UNITS: tuple[TimeUnits, ...] = get_args(TimeUnits)
 VALID_AXIS_TYPES: tuple[AxisType, ...] = get_args(AxisType)
-  
+
 ureg = pint.UnitRegistry()
+
 
 def validate_axis_type(axis_type: Any) -> TypeGuard[AxisType]:
     """Validate axis type against standard list
