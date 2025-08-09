@@ -3,6 +3,7 @@ import warnings
 from pathlib import Path
 
 import numpy as np
+import pint
 import pydantic
 import pytest
 import zarr
@@ -354,6 +355,15 @@ class TestAxis:
 
         # Don't check units if we don't specify type
         Axis(name="test", unit="not checked")
+
+    def test_ome_units(self) -> None:
+        ureg = pint.UnitRegistry()
+        for unit_name in geff.valid_values.VALID_SPACE_UNITS:
+            if not ureg(unit_name).check("[length]"):
+                raise Exception(f"OME unit {unit_name} not a length unit in pint")
+        for unit_name in geff.valid_values.VALID_TIME_UNITS:
+            if not ureg(unit_name).check("[time]"):
+                raise Exception(f"OME unit {unit_name} not a time unit in pint")
 
     def test_min_max(self) -> None:
         # Min no max
